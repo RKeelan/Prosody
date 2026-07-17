@@ -1,0 +1,8 @@
+# Pin exact versions on install; Dependabot handles deliberate upgrades.
+[install]
+exact = true
+
+# Enforce coverage in every `bun test` run, locally and in CI.
+[test]
+coverage = true
+coverageThreshold = 0.75
