@@ -49,7 +49,7 @@ Tests: a minimal valid pack parses; representative invalid packs fail with messa
 - checks, per Vision.md: every anchor resolves uniquely in the poem text; every target pronoun has an antecedent entry; scansion syllable counts match the text; device and allusion spans exist; every device instance references a palette entry the pack defines; glossary coverage flags are consistent; cross-activity references line up (the Activity 6 apostrophe that Activity 7 checks against)
 - add a CI step validating every pack under `packs/`, so committed packs stay proven
 
-## Task 4: fixture pack
+## ~~Task 4: fixture pack~~
 
 Author one complete pack (Ozymandias—sonnet) for a short public-domain poem and commit it under `packs/`, iterating against the validator until `bun run validate` is clean. This pack is the development fixture for every UI task that follows. Authoring is by hand here; the authoring skill and mechanical checks are post-MVP.
 
