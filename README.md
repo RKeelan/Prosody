@@ -14,7 +14,7 @@ tapping tokens, never on browser text selection. See [Vision.md](Vision.md) for 
 
 Vite + React + TypeScript, Tailwind CSS v4, and shadcn/ui, with Bun as the package manager,
 script runner, and test runner. Each poem is a JSON data pack validated against a shared Zod
-schema. Deployed to GitHub Pages.
+schema. Deployed to Cloudflare Pages.
 
 ## Commands
 
@@ -26,6 +26,15 @@ schema. Deployed to GitHub Pages.
 - `bun run build` — type-check and build for production
 - `bun run preview` — preview the production build locally
 - `bun run validate` — validate pack JSON files against the schema and consistency checks
+
+## Deployment
+
+Cloudflare Pages builds from this repo: every push to `main` publishes production, and every
+pull request gets its own preview URL. Project settings:
+
+- Build command: `bun install --frozen-lockfile && bun run build`
+- Build output directory: `dist`
+- No environment variables; the Bun version is pinned in `.bun-version`
 
 ## License
 

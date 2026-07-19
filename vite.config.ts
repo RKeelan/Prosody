@@ -5,8 +5,8 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Served from https://rkeelan.github.io/Prosody/ on GitHub Pages.
-  base: "/Prosody/",
+  // Cloudflare Pages serves from the domain root.
+  base: "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
