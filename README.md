@@ -25,6 +25,7 @@ schema. Deployed to GitHub Pages.
 - `bun test` — run tests (fails under 75% coverage)
 - `bun run build` — type-check and build for production
 - `bun run preview` — preview the production build locally
+- `bun run validate` — validate pack JSON files against the schema and consistency checks
 
 ## License
 

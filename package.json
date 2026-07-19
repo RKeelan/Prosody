@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "check": "biome check .",
     "format": "biome check --fix .",
-    "test": "bun test"
+    "test": "bun test",
+    "validate": "bun scripts/validate.ts"
   },
   "dependencies": {
     "clsx": "2.1.1",
