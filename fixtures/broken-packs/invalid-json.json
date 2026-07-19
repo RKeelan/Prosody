@@ -1,0 +1,746 @@
+{
+  "schemaVersion": 1,
+  "id": "ozymandias",
+  "title": "Ozymandias",
+  "poet": "Percy Bysshe Shelley",
+  "activeActivities": {
+    "readSilently": true,
+    "scansion": true,
+    "pronouns": true,
+    "sentences": true,
+    "glossary": true,
+    "devices": true,
+    "broadDevices": true,
+    "allusions": true,
+    "argument": true
+  },
+  "poem": {
+    "stanzas": [
+      {
+        "lines": [
+          "I met a traveller from an antique land,",
+          "Who said—\"Two vast and trunkless legs of stone",
+          "Stand in the desert. . . . Near them, on the sand,",
+          "Half sunk a shattered visage lies, whose frown,",
+          "And wrinkled lip, and sneer of cold command,",
+          "Tell that its sculptor well those passions read",
+          "Which yet survive, stamped on these lifeless things,",
+          "The hand that mocked them, and the heart that fed;",
+          "And on the pedestal, these words appear:",
+          "My name is Ozymandias, King of Kings;",
+          "Look on my Works, ye Mighty, and despair!",
+          "Nothing beside remains. Round the decay",
+          "Of that colossal Wreck, boundless and bare",
+          "The lone and level sands stretch far away.\""
+        ]
+      }
+    ],
+    "syllabifications": [
+      { "word": { "exact": "traveller" }, "syllables": ["trav", "eller"] },
+      { "word": { "exact": "antique" }, "syllables": ["an", "tique"] },
+      { "word": { "exact": "wrinkled" }, "syllables": ["wrin", "kled"] },
+      { "word": { "exact": "lifeless" }, "syllables": ["life", "less"] },
+      { "word": { "exact": "Ozymandias" }, "syllables": ["O", "zy", "man", "dias"] }
+    ]
+  },
+  "scansion": {
+    "metreName": "iambic pentameter",
+    "lines": [
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "stressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "unstressed", "alternates": ["stressed"] },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "unstressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      },
+      {
+        "syllables": [
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" },
+          { "answer": "stressed", "alternates": ["unstressed"] },
+          { "answer": "stressed" },
+          { "answer": "unstressed" },
+          { "answer": "stressed" }
+        ]
+      }
+    ],
+    "deviations": [
+      {
+        "anchor": { "exact": "an antique land" },
+        "note": "The fourth and fifth feet fall as a pyrrhic and a spondee, dropping the line's weight onto 'antique land'."
+      },
+      {
+        "anchor": { "exact": "Two vast" },
+        "note": "A spondee slows the opening of the traveller's report, piling stress on the ruin's colossal scale."
+      },
+      {
+        "anchor": { "exact": "Stand in" },
+        "note": "An initial trochaic inversion plants the stressed verb 'Stand', so the legs rise on the line's first beat."
+      },
+      {
+        "anchor": { "exact": "Half sunk" },
+        "note": "The opening spondee drops two heavy stresses, enacting the visage's collapse into the sand."
+      },
+      {
+        "anchor": { "exact": "Tell that" },
+        "note": "An initial trochee throws the stress onto 'Tell', the verb governing the whole boast-bearing sentence."
+      },
+      {
+        "anchor": { "exact": "stamped on" },
+        "note": "A trochaic inversion after the caesura stresses 'stamped', the act that fixed the passions onto stone."
+      },
+      {
+        "anchor": { "exact": "Look on" },
+        "note": "The imperative 'Look' takes an inverted first foot, commanding the reader before the boast names its object."
+      },
+      {
+        "anchor": { "exact": "Nothing" },
+        "note": "'Nothing' opens with a trochaic inversion at the poem's turn, the stressed negation sweeping the boast away."
+      },
+      {
+        "anchor": { "exact": "Round the" },
+        "note": "After the full stop, a second inversion reorients the poem outward to the surrounding waste."
+      },
+      {
+        "anchor": { "exact": "boundless" },
+        "note": "'boundless' falls as a trochee, its stress on 'bound' clashing with 'Wreck' across the caesura to spread the emptiness."
+      },
+      {
+        "anchor": { "exact": "stretch far" },
+        "note": "The closing spondee clusters stresses to stretch the final line, miming sands that reach past sight."
+      }
+    ],
+    "rhyme": [[0, 2, 4], [1, 3], [5, 7], [6, 9], [8, 10, 12], [11, 13]],
+    "elisionQuestions": [
+      {
+        "anchor": { "exact": "traveller" },
+        "prompt": "How many syllables does 'traveller' take here—the full three, or two, elided to 'trav'ler' to hold the iambic line?",
+        "syllableCount": { "answer": 2, "alternates": [3] }
+      },
+      {
+        "anchor": { "exact": "Ozymandias" },
+        "prompt": "How many syllables does 'Ozymandias' take here—the elided four that keep the pentameter, or the full five of ordinary speech?",
+        "syllableCount": { "answer": 4, "alternates": [5] }
+      }
+    ]
+  },
+  "pronouns": [
+    {
+      "pronoun": { "exact": "them", "prefix": "Near" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "trunkless legs" } },
+        "alternates": [{ "kind": "text", "text": "(implied) the two vast stone legs" }]
+      }
+    },
+    {
+      "pronoun": { "exact": "whose" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "visage" } },
+        "alternates": [
+          { "kind": "text", "text": "(implied) Ozymandias, the king whose face the visage depicts" }
+        ]
+      }
+    },
+    {
+      "pronoun": { "exact": "its" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "visage" } },
+        "alternates": [{ "kind": "text", "text": "(implied) the statue's" }]
+      }
+    },
+    {
+      "pronoun": { "exact": "Which" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "those passions" } }
+      }
+    },
+    {
+      "pronoun": { "exact": "these", "suffix": "lifeless" },
+      "antecedent": {
+        "answer": { "kind": "text", "text": "(implied) the statue's surviving stone fragments" },
+        "alternates": [
+          {
+            "kind": "span",
+            "anchor": { "exact": "The hand that mocked them, and the heart that fed" }
+          }
+        ]
+      }
+    },
+    {
+      "pronoun": { "exact": "them", "prefix": "mocked" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "those passions" } }
+      }
+    },
+    {
+      "pronoun": { "exact": "hand" },
+      "antecedent": {
+        "answer": {
+          "kind": "text",
+          "text": "(implied) the sculptor's hand, which carved the passions"
+        },
+        "alternates": [{ "kind": "text", "text": "(implied) Ozymandias's own hand" }]
+      }
+    },
+    {
+      "pronoun": { "exact": "heart" },
+      "antecedent": {
+        "answer": {
+          "kind": "text",
+          "text": "(implied) Ozymandias's heart, whose ruling passions the sculpture records"
+        },
+        "alternates": [{ "kind": "text", "text": "(implied) the sculptor's heart" }]
+      }
+    },
+    {
+      "pronoun": { "exact": "these", "suffix": "words" },
+      "antecedent": {
+        "answer": {
+          "kind": "text",
+          "text": "(implied, looking forward) the inscription that follows on the pedestal"
+        }
+      }
+    },
+    {
+      "pronoun": { "exact": "My" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "Ozymandias" } },
+        "alternates": [
+          { "kind": "text", "text": "(implied) King Ozymandias, speaking his own inscription" }
+        ]
+      }
+    },
+    {
+      "pronoun": { "exact": "my" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "Ozymandias" } },
+        "alternates": [
+          { "kind": "text", "text": "(implied) Ozymandias, the same boasting speaker" }
+        ]
+      }
+    },
+    {
+      "pronoun": { "exact": "that", "suffix": "colossal" },
+      "antecedent": {
+        "answer": { "kind": "text", "text": "(implied) the shattered colossus just described" },
+        "alternates": [{ "kind": "span", "anchor": { "exact": "colossal Wreck" } }]
+      }
+    }
+  ],
+  "sentences": [
+    {
+      "anchor": { "exact": "I met a traveller from an antique land, Who said" },
+      "subject": { "answer": { "kind": "span", "anchor": { "exact": "I" } } },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "met" } } },
+      "object": {
+        "kind": "present",
+        "target": {
+          "answer": { "kind": "span", "anchor": { "exact": "a traveller from an antique land" } }
+        }
+      },
+      "paraphrase": "The speaker met a traveller from an ancient land, who then spoke."
+    },
+    {
+      "anchor": { "exact": "Two vast and trunkless legs of stone Stand in the desert" },
+      "subject": {
+        "answer": { "kind": "span", "anchor": { "exact": "Two vast and trunkless legs of stone" } }
+      },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "Stand" } } },
+      "object": { "kind": "none" },
+      "paraphrase": "Two huge stone legs, their torso long gone, stand upright in the desert."
+    },
+    {
+      "anchor": {
+        "exact": "Near them, on the sand, Half sunk a shattered visage lies, whose frown, And wrinkled lip, and sneer of cold command, Tell that its sculptor well those passions read Which yet survive, stamped on these lifeless things, The hand that mocked them, and the heart that fed"
+      },
+      "subject": { "answer": { "kind": "span", "anchor": { "exact": "a shattered visage" } } },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "lies" } } },
+      "object": { "kind": "none" },
+      "paraphrase": "Near the legs a half-buried, shattered stone face lies, its carved frown, lip, and sneer showing that the sculptor well understood the king's passions, which outlast both the hand that copied them and the heart that fed them.",
+      "gnarly": {
+        "label": "Main clause: a shattered visage lies (half sunk, near the legs, on the sand)",
+        "anchor": { "exact": "a shattered visage lies" },
+        "children": [
+          {
+            "label": "Adverbials of place and state: Near them, on the sand, Half sunk",
+            "anchor": { "exact": "Half sunk" }
+          },
+          {
+            "label": "Relative clause modifying 'visage': whose frown, lip, and sneer Tell that...",
+            "anchor": { "exact": "whose frown" },
+            "children": [
+              {
+                "label": "Compound subject: whose frown, And wrinkled lip, and sneer of cold command",
+                "anchor": { "exact": "sneer of cold command" }
+              },
+              {
+                "label": "Verb: Tell",
+                "anchor": { "exact": "Tell" }
+              },
+              {
+                "label": "Object clause (what they tell): that its sculptor well those passions read",
+                "anchor": { "exact": "its sculptor well those passions read" },
+                "children": [
+                  {
+                    "label": "Anastrophe—object fronted: 'those passions ... read' means 'read those passions well'",
+                    "anchor": { "exact": "those passions" }
+                  },
+                  {
+                    "label": "Relative clause modifying 'passions': Which yet survive, stamped on these lifeless things",
+                    "anchor": { "exact": "Which yet survive" },
+                    "children": [
+                      {
+                        "label": "Appositive naming the lifeless things: The hand that mocked them, and the heart that fed",
+                        "anchor": { "exact": "The hand that mocked them, and the heart that fed" }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "anchor": { "exact": "And on the pedestal, these words appear" },
+      "subject": { "answer": { "kind": "span", "anchor": { "exact": "these words" } } },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "appear" } } },
+      "object": { "kind": "none" },
+      "paraphrase": "On the statue's pedestal, these words appear."
+    },
+    {
+      "anchor": { "exact": "My name is Ozymandias, King of Kings" },
+      "subject": { "answer": { "kind": "span", "anchor": { "exact": "My name" } } },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "is" } } },
+      "object": {
+        "kind": "present",
+        "target": {
+          "answer": { "kind": "span", "anchor": { "exact": "Ozymandias, King of Kings" } }
+        }
+      },
+      "paraphrase": "The speaker declares that his name is Ozymandias, king of kings."
+    },
+    {
+      "anchor": { "exact": "Look on my Works, ye Mighty, and despair" },
+      "subject": {
+        "answer": { "kind": "span", "anchor": { "exact": "ye Mighty" } },
+        "alternates": [
+          { "kind": "text", "text": "(implied) you, the Mighty whom the inscription commands" }
+        ]
+      },
+      "verb": {
+        "answer": { "kind": "span", "anchor": { "exact": "Look" } },
+        "alternates": [{ "kind": "span", "anchor": { "exact": "despair" } }]
+      },
+      "object": { "kind": "none" },
+      "paraphrase": "Ozymandias commands the mighty to look upon his works and despair."
+    },
+    {
+      "anchor": { "exact": "Nothing beside remains" },
+      "subject": { "answer": { "kind": "span", "anchor": { "exact": "Nothing" } } },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "remains" } } },
+      "object": { "kind": "none" },
+      "paraphrase": "Nothing else survives beside the ruin."
+    },
+    {
+      "anchor": {
+        "exact": "Round the decay Of that colossal Wreck, boundless and bare The lone and level sands stretch far away"
+      },
+      "subject": {
+        "answer": { "kind": "span", "anchor": { "exact": "The lone and level sands" } }
+      },
+      "verb": { "answer": { "kind": "span", "anchor": { "exact": "stretch" } } },
+      "object": { "kind": "none" },
+      "paraphrase": "Around the ruin of the colossal wreck, the bare, boundless, flat sands stretch far into the distance."
+    }
+  ],
+  "glossary": [
+    {
+      "word": { "exact": "antique" },
+      "essential": true,
+      "senses": ["ancient, of the distant past—here an ancient land, Egypt"]
+    },
+    {
+      "word": { "exact": "trunkless" },
+      "essential": true,
+      "senses": ["without a trunk—the statue's torso is gone, leaving only the legs"]
+    },
+    {
+      "word": { "exact": "visage" },
+      "essential": true,
+      "senses": ["the face, or the expression the face wears"]
+    },
+    {
+      "word": { "exact": "sneer" },
+      "essential": true,
+      "senses": ["a scornful, contemptuous curl of the lip"]
+    },
+    {
+      "word": { "exact": "pedestal" },
+      "essential": true,
+      "senses": ["the base or plinth on which a statue or column stands"]
+    },
+    {
+      "word": { "exact": "boundless" },
+      "essential": true,
+      "senses": ["without limit or bound; endless"]
+    },
+    {
+      "word": { "exact": "decay" },
+      "essential": true,
+      "senses": [
+        "the process or state of falling into ruin; here, the crumbling remains themselves"
+      ]
+    },
+    {
+      "word": { "exact": "mocked" },
+      "oddUsage": true,
+      "senses": [
+        "ridiculed, treated with scorn",
+        "imitated or copied—as an artist mocks a model, reproducing its features in stone"
+      ]
+    },
+    {
+      "word": { "exact": "read" },
+      "oddUsage": true,
+      "senses": [
+        "took in words from a page",
+        "discerned and interpreted the king's passions, reading a person's character as if it were text"
+      ]
+    },
+    {
+      "word": { "exact": "survive" },
+      "oddUsage": true,
+      "senses": [
+        "to remain alive; to persist (intransitive)",
+        "to outlive, to outlast (transitive)—the passions outlast the hand and the heart that made them"
+      ]
+    },
+    {
+      "word": { "exact": "colossal" },
+      "oddUsage": true,
+      "senses": [
+        "enormous, gigantic in scale",
+        "of or like a colossus—a giant statue; the word's root recalls exactly such a monument"
+      ]
+    }
+  ],
+  "devices": {
+    "palette": [
+      {
+        "id": "irony",
+        "name": "irony",
+        "definition": "A gap between what is said or expected and what is actually the case—here the tyrant's claim to permanence set against the ruin that surrounds it.",
+        "canonicalExample": {
+          "text": "Water, water, every where, / Nor any drop to drink",
+          "source": "Coleridge, 'The Rime of the Ancient Mariner'"
+        }
+      },
+      {
+        "id": "alliteration",
+        "name": "alliteration",
+        "definition": "The repetition of the same initial consonant sound in nearby words.",
+        "canonicalExample": {
+          "text": "dapple-dawn-drawn Falcon, in his riding",
+          "source": "Hopkins, 'The Windhover'"
+        }
+      },
+      {
+        "id": "synecdoche",
+        "name": "synecdoche",
+        "definition": "A figure in which a part stands for the whole (or the whole for a part).",
+        "canonicalExample": {
+          "text": "Was this the face that launch'd a thousand ships",
+          "source": "Marlowe, 'Doctor Faustus'"
+        }
+      },
+      {
+        "id": "anastrophe",
+        "name": "anastrophe",
+        "definition": "The inversion of ordinary word order—object before verb, adverbial before subject—for emphasis or metre.",
+        "canonicalExample": {
+          "text": "Of Man's first disobedience ... Sing, Heavenly Muse",
+          "source": "Milton, 'Paradise Lost'"
+        }
+      },
+      {
+        "id": "apostrophe",
+        "name": "apostrophe",
+        "definition": "A direct address to an absent or imaginary person, a thing, or an abstraction.",
+        "canonicalExample": {
+          "text": "Death, be not proud, though some have called thee / Mighty and dreadful",
+          "source": "Donne, 'Holy Sonnet X'"
+        }
+      },
+      {
+        "id": "caesura",
+        "name": "caesura",
+        "definition": "A strong pause within a line of verse, usually marked by punctuation.",
+        "canonicalExample": {
+          "text": "To err is human; to forgive, divine.",
+          "source": "Pope, 'An Essay on Criticism'"
+        }
+      },
+      {
+        "id": "enjambment",
+        "name": "enjambment",
+        "definition": "The running-over of a sentence or phrase from one line of verse into the next without a terminal pause.",
+        "canonicalExample": {
+          "text": "Dust as we are, the immortal spirit grows / Like harmony in music",
+          "source": "Wordsworth, 'The Prelude'"
+        }
+      }
+    ],
+    "instances": [
+      {
+        "deviceId": "irony",
+        "anchor": { "exact": "Look on my Works, ye Mighty, and despair" },
+        "functionNote": "The tyrant's boast of unrivalled power now reads as its opposite—nothing of his works survives to be envied, only ruin."
+      },
+      {
+        "deviceId": "apostrophe",
+        "anchor": { "exact": "ye Mighty" },
+        "functionNote": "The inscription turns from statement to direct address, commanding the powerful who might one day read it."
+      },
+      {
+        "deviceId": "synecdoche",
+        "anchor": { "exact": "The hand that mocked them" },
+        "functionNote": "The sculptor's hand stands for the whole artist and his shaping craft."
+      },
+      {
+        "deviceId": "synecdoche",
+        "anchor": { "exact": "the heart that fed" },
+        "functionNote": "The king's heart stands for the whole man and the ruling passions he nourished."
+      },
+      {
+        "deviceId": "anastrophe",
+        "anchor": { "exact": "its sculptor well those passions read" },
+        "functionNote": "Object before verb—'read those passions well'—throws weight onto 'passions' and slows the clause to a reader's pace."
+      },
+      {
+        "deviceId": "alliteration",
+        "anchor": { "exact": "cold command" },
+        "functionNote": "The hard paired c's stiffen the phrase, hardening the tyrant's authority into stone."
+      },
+      {
+        "deviceId": "alliteration",
+        "anchor": { "exact": "boundless and bare" },
+        "functionNote": "The paired b's bind the two words, and the open vowels stretch the emptiness they name."
+      },
+      {
+        "deviceId": "alliteration",
+        "anchor": { "exact": "lone and level" },
+        "functionNote": "The repeated l's flatten the line's music to match the flatness of the sands."
+      },
+      {
+        "deviceId": "caesura",
+        "anchor": { "exact": "remains. Round" },
+        "functionNote": "The full stop mid-line halts the poem at its turn, the silence enacting the void that 'nothing... remains'."
+      },
+      {
+        "deviceId": "enjambment",
+        "anchor": { "exact": "legs of stone" },
+        "functionNote": "The line break holds the legs suspended before 'Stand' completes them, miming the eye's travel over the wreck."
+      }
+    ]
+  },
+  "broadDevices": {
+    "speaker": "The living voice is an unnamed first-person narrator ('I met a traveller'), who claims almost nothing of his own and merely relays what he was told; the traveller is the inner speaker who describes the statue; and Ozymandias himself speaks, long dead, only through the inscription the traveller quotes.",
+    "addressee": "The frame poem addresses no one in particular—the reader, overhearing a traveller's tale. Its only explicit address is buried in the inscription, where Ozymandias apostrophises 'ye Mighty', the rival rulers he commands to look on his works and despair. That embedded, now-hollow command is the poem's rhetorical core.",
+    "pointOfView": "Nested, receding narration: the poet reports a traveller, who reports the statue, which quotes the dead king. Each frame sets Ozymandias's boast further off, so his first-person 'I' reaches us third-hand, already ironised by the ruin the traveller has seen—the tyrant's voice survives only as mediated, diminished hearsay."
+  },
+  "allusions": [
+    {
+      "anchor": { "exact": "Ozymandias" },
+      "source": "Ozymandias is the Greek name for the Egyptian pharaoh Ramesses II (reigned in the 13th century BCE), whose colossal mortuary statue at the Ramesseum in Thebes carried his throne-name, User-maat-re, Graecised by ancient writers as Ozymandias.",
+      "imports": "Naming the pharaoh by his half-forgotten Greek title measures how far even the greatest king has slipped from the tongues that once feared him—the man endures only as a garbled foreign word."
+    },
+    {
+      "anchor": { "exact": "Look on my Works, ye Mighty, and despair" },
+      "source": "The inscription reworks the one Diodorus Siculus (1st century BCE) recorded on the Ramesseum colossus: 'King of Kings am I, Osymandias. If anyone would know how great I am and where I lie, let him surpass one of my works.' Shelley likely met it through Diodorus's history.",
+      "imports": "Shelley keeps the tyrant's challenge but strips its triumph—where Diodorus's king dares rivals to outdo his works, Shelley's dares them to 'despair', and the surrounding desert has already answered him."
+    },
+    {
+      "anchor": { "exact": "King of Kings" },
+      "source": "'King of Kings' was the title of the Persian and Assyrian emperors, and in the King James Bible it names God and Christ (1 Timothy 6:15; Revelation 19:16).",
+      "imports": "The most exalted title of the ancient world, claimed here by a king now nameless dust—and, to a Christian reader, a blasphemous usurping of a name reserved for God, which deepens the 
