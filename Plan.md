@@ -37,7 +37,7 @@ Add `zod` (pinned exact, like all dependencies). Define the complete pack schema
 
 Tests: a minimal valid pack parses; representative invalid packs fail with messages that point at the offending field. This is the largest design task in the plan; if the PR grows unwieldy, split it by schema section—but the schema must be complete before Stage 2 begins.
 
-## Task 2: tokeniser and anchor resolution
+## ~~Task 2: tokeniser and anchor resolution~~
 
 - tokenise poem text once: word and punctuation tokens with stable indices; grading compares word tokens only, so a trailing comma or leading "the" never fails an overlap check
 - resolve quote anchors to token spans at load; report unresolvable and ambiguous anchors with enough context to fix the pack
