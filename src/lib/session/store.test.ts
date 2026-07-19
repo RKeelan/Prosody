@@ -77,6 +77,70 @@ describe("Activity 1 marks", () => {
     );
     expect(byId).toEqual({ a: "resolved", b: "dismissed" });
   });
+
+  test("ignores a second mark of the same kind over the same span", () => {
+    const store = makeStore();
+    const { addMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(3, 6) });
+    addMark({ id: "b", kind: "stumbled", span: span(3, 6) });
+    const marks = store.getState().session.currentAttempt.marks;
+    expect(marks.map((m) => m.id)).toEqual(["a"]);
+  });
+
+  test("a different kind over the same span is a distinct mark", () => {
+    const store = makeStore();
+    const { addMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(3, 6) });
+    addMark({ id: "b", kind: "odd-word", span: span(3, 6) });
+    expect(store.getState().session.currentAttempt.marks).toHaveLength(2);
+  });
+
+  test("an overlapping but unequal span is a distinct mark", () => {
+    const store = makeStore();
+    const { addMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(3, 6) });
+    addMark({ id: "b", kind: "stumbled", span: span(3, 7) });
+    expect(store.getState().session.currentAttempt.marks).toHaveLength(2);
+  });
+
+  test("a dismissed mark does not block re-marking its span", () => {
+    const store = makeStore();
+    const { addMark, dismissMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(3, 6) });
+    dismissMark("a");
+    addMark({ id: "b", kind: "stumbled", span: span(3, 6) });
+    const marks = store.getState().session.currentAttempt.marks;
+    expect(marks.map((m) => [m.id, m.status])).toEqual([
+      ["a", "dismissed"],
+      ["b", "open"],
+    ]);
+  });
+
+  test("removes a mark outright, leaving the rest", () => {
+    const store = makeStore();
+    const { addMark, removeMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(0, 1) });
+    addMark({ id: "b", kind: "odd-word", span: span(2, 4) });
+    removeMark("a");
+    expect(store.getState().session.currentAttempt.marks.map((m) => m.id)).toEqual(["b"]);
+  });
+
+  test("removing frees the span to be marked again", () => {
+    const store = makeStore();
+    const { addMark, removeMark } = store.getState().actions;
+    addMark({ id: "a", kind: "stumbled", span: span(3, 6) });
+    removeMark("a");
+    addMark({ id: "b", kind: "stumbled", span: span(3, 6) });
+    expect(store.getState().session.currentAttempt.marks.map((m) => m.id)).toEqual(["b"]);
+  });
+
+  test("removing an unknown id leaves the session untouched", () => {
+    const store = makeStore();
+    store.getState().actions.addMark({ id: "a", kind: "stumbled", span: span(0, 1) });
+    const before = store.getState().session;
+    store.getState().actions.removeMark("nope");
+    expect(store.getState().session).toBe(before);
+  });
 });
 
 describe("miss lists", () => {

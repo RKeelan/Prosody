@@ -24,7 +24,7 @@
  */
 
 import { createStore, type StoreApi } from "zustand/vanilla";
-import type { TokenSpan } from "../grade";
+import { sameSpan, type TokenSpan } from "../grade";
 import {
   type ActivityKey,
   type ActivityState,
@@ -134,8 +134,19 @@ export interface SessionActions {
   commitActivity(activity: ActivityKey, score?: ScoreSummary): void;
   /** Set or update an activity's score, allowed before or after commit (self-grading). */
   setScore(activity: ActivityKey, score: ScoreSummary): void;
-  /** Add an Activity 1 mark. A duplicate id is ignored. */
+  /**
+   * Add an Activity 1 mark. Ignored when the id is already taken, or when a
+   * live mark of the same kind already covers exactly the same span—marking
+   * one span twice is a slip, and two identical marks are indistinguishable on
+   * the poem while inflating the gate's list.
+   */
   addMark(mark: { id: string; kind: MarkKind; span: TokenSpan }): void;
+  /**
+   * Delete an Activity 1 mark outright, as when the learner un-marks a span
+   * they marked by mistake. Distinct from {@link dismissMark}: dismissing is a
+   * decision the gate records, removing is an undo that leaves no trace.
+   */
+  removeMark(id: string): void;
   /** Resolve an Activity 1 mark. */
   resolveMark(id: string): void;
   /** Dismiss an Activity 1 mark (consciously set aside at the gate). */
@@ -201,7 +212,15 @@ export function createSessionStore(config: SessionStoreConfig): StoreApi<Session
 
       addMark: (mark) =>
         apply((s) => {
-          if (s.currentAttempt.marks.some((m) => m.id === mark.id)) return s;
+          // A dismissed mark does not block a new one: it is invisible on the
+          // poem, so refusing to re-mark that span would look like a dead
+          // button. Re-marking it is the learner raising it afresh.
+          const duplicate = s.currentAttempt.marks.some(
+            (m) =>
+              m.id === mark.id ||
+              (m.kind === mark.kind && m.status !== "dismissed" && sameSpan(m.span, mark.span)),
+          );
+          if (duplicate) return s;
           const created: Mark = {
             id: mark.id,
             kind: mark.kind,
@@ -209,6 +228,14 @@ export function createSessionStore(config: SessionStoreConfig): StoreApi<Session
             status: "open",
           };
           return replaceMarks(s, [...s.currentAttempt.marks, created]);
+        }),
+
+      removeMark: (id) =>
+        apply((s) => {
+          const remaining = s.currentAttempt.marks.filter((m) => m.id !== id);
+          return remaining.length === s.currentAttempt.marks.length
+            ? s
+            : replaceMarks(s, remaining);
         }),
 
       resolveMark: (id) => apply((s) => setMarkStatus(s, id, "resolved")),

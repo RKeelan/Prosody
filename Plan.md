@@ -80,7 +80,7 @@ Replace GitHub Pages with Cloudflare Pages, matching recipe-db, so every PR gets
 - first shadcn/ui components land here
 - Richard tests: load the fixture pack by picker and by drag-drop; load a deliberately broken pack and read the inline errors; navigate between activities; reload and confirm state survives
 
-### Task 8: poem renderer
+### ~~Task 8: poem renderer~~
 
 The one custom token-based component underlying every activity:
 
@@ -88,7 +88,10 @@ The one custom token-based component underlying every activity:
 - annotation layers: colour per type, toggleable, persisting across activities
 - line and stanza layout that survives small screens; touch targets sized for a phone
 - selection logic as pure tested modules; visual behaviour verified by hand at phone width
+- the renderer has no activity to live in until Stage 3, so it ships behind a workbench (`PoemWorkbench`) that stands in for every activity screen: tap a span, mark it, toggle the layers. Task 9 absorbs the marker controls into the real Activity 1 (`$Claude`)
 - Richard tests: at phone width, or better on his phone—tap-select spans within and across lines, adjust and clear a selection, toggle annotation layers
+
+### Task 8.1: Handle overlapping marked spans
 
 ## Stage 3: activities
 
