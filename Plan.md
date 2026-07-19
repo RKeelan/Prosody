@@ -55,7 +55,7 @@ Author one complete pack (Ozymandias—sonnet) for a short public-domain poem an
 
 ## Stage 2: app core
 
-## Task 5: Cloudflare Pages hosting and PR previews
+## ~~Task 5: Cloudflare Pages hosting and PR previews~~
 
 Replace GitHub Pages with Cloudflare Pages, matching recipe-db, so every PR gets a preview deployment Richard can open from his phone.
 
