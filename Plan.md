@@ -21,11 +21,11 @@ The scaffold (commit b032309) provides Vite + React + TypeScript, Tailwind v4, s
 
 Vision.md's build order is explicit: pack schema and CLI validator before any UI, every consistency check in the validator, packs proven before the app ever loads them. This stage has no user-facing surface; the first "Richard tests" checkpoint arrives with Task 5.
 
-## ~~~~Task 0: commit this plan~~
+## ~~Task 0: commit this plan~~
 
 First PR: add Plan.md to the repo, along with the Vision.md edit switching hosting to Cloudflare Pages (decided at plan review).
 
-## Task 1: pack schema
+## ~~Task 1: pack schema~~
 
 Add `zod` (pinned exact, like all dependencies). Define the complete pack schema in `src/lib/pack/` with inferred TypeScript types:
 
