@@ -12,6 +12,7 @@ This plan turns [Vision.md](Vision.md) into an ordered series of pull requests. 
 - Tasks with a "Richard tests" line deliver a user-facing feature. Once the PR is open, Cloudflare Pages builds a preview at a unique URL, linked from the PR's checks; hand Richard the listed flow to run there, usually from his phone, and fold his feedback in by amending the commit. Merge and move on only after his OK. The dev server remains the loop for local iteration.
 - When implementation proves part of this plan wrong, update the plan text in the same PR and call the change out in the PR body.
 - Keep README.md and AGENTS.md current as commands and layout change (e.g., a new `bun run validate` script).
+- When a "Richard tests" flow needs fixtures the task doesn't otherwise produce (a deliberately broken pack, a second sample poem, seeded storage state), creating those fixtures is part of the task, not a separate ask.
 
 ## Already in place
 
@@ -70,7 +71,7 @@ Replace GitHub Pages with Cloudflare Pages, matching recipe-db, so every PR gets
 - attempt model: commits irreversible within an attempt; a finished attempt archives its scores and surviving miss list; the same pack restudies in a fresh attempt
 - hand-rolled localStorage persistence keyed by pack id + content hash (`$Claude` hash the raw pack file text); serialisation logic pure and tested
 
-### Task 7: app shell and pack loading
+### ~~Task 7: app shell and pack loading~~
 
 - landing screen: file picker and drag-drop, `FileReader`, Zod validation with inline errors on load
 - on content-hash change with existing progress: offer keep-progress or start-fresh
