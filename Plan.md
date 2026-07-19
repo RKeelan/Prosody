@@ -43,7 +43,7 @@ Tests: a minimal valid pack parses; representative invalid packs fail with messa
 - resolve quote anchors to token spans at load; report unresolvable and ambiguous anchors with enough context to fix the pack
 - pure modules under `src/lib/`, fully tested
 
-## Task 3: validator CLI
+## ~~Task 3: validator CLI~~
 
 - `scripts/validate.ts`, run as `bun scripts/validate.ts <pack.json>` plus a `bun run validate` package script—bun executes TypeScript directly, so no build step; must work on Windows and in CI
 - checks, per Vision.md: every anchor resolves uniquely in the poem text; every target pronoun has an antecedent entry; scansion syllable counts match the text; device and allusion spans exist; every device instance references a palette entry the pack defines; glossary coverage flags are consistent; cross-activity references line up (the Activity 6 apostrophe that Activity 7 checks against)

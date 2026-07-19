@@ -17,6 +17,7 @@ runner, and test runner. Grading logic lives in pure TypeScript modules under `b
 - `bun run format` — Biome auto-fix (format and safe lints)
 - `bun test` — run tests (fails under 75% coverage)
 - `bun run build` — type-check (`tsc -b`) and build for production
+- `bun run validate` — validate pack JSON files against the schema and consistency checks
 
 ## Dependency Policy
 
