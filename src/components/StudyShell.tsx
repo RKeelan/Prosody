@@ -6,6 +6,7 @@
  * depend on which screen is showing.
  */
 
+import { useMemo } from "react";
 import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
 import { ActivityNav } from "@/components/ActivityNav";
@@ -14,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { activityInfo } from "@/lib/activityInfo";
 import type { Pack } from "@/lib/pack";
 import type { ActivityKey, SessionStoreState } from "@/lib/session";
+import { tokenisePoem } from "@/lib/tokenise";
 
 interface StudyShellProps {
   pack: Pack;
@@ -31,6 +33,9 @@ export function StudyShell({
   onChangePoem,
 }: StudyShellProps) {
   const session = useStore(store, (s) => s.session);
+  // Tokenise once per pack, per Vision.md, and hand the same stream to every
+  // activity: anchor resolution and grading already speak these indices.
+  const tokenised = useMemo(() => tokenisePoem(pack.poem), [pack.poem]);
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
@@ -52,7 +57,7 @@ export function StudyShell({
         onSelect={onSelectActivity}
       />
 
-      <ActivityScreen info={activityInfo(activity)} />
+      <ActivityScreen info={activityInfo(activity)} tokenised={tokenised} store={store} />
     </main>
   );
 }

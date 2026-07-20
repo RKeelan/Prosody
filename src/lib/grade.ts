@@ -19,3 +19,8 @@ export interface TokenSpan {
 export function spansOverlap(a: TokenSpan, b: TokenSpan): boolean {
   return a.start < b.end && b.start < a.end;
 }
+
+/** True when two token spans cover exactly the same tokens. */
+export function sameSpan(a: TokenSpan, b: TokenSpan): boolean {
+  return a.start === b.start && a.end === b.end;
+}
