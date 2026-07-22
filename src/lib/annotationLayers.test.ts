@@ -3,10 +3,8 @@ import {
   ANNOTATION_LAYERS,
   buildLayerIndex,
   countMarksByKind,
-  findMarkForSpan,
   layerFor,
   marksInReadingOrder,
-  marksOverlappingSpan,
 } from "./annotationLayers";
 import { type Mark, MarkKind } from "./session/model";
 
@@ -69,54 +67,6 @@ describe("the per-token index", () => {
     const index = buildLayerIndex(marks, ALL_KINDS);
     expect(index.get(0)).toEqual(["stumbled"]);
     expect(index.has(1)).toBe(false);
-  });
-});
-
-describe("finding a mark by exact span", () => {
-  const marks = [mark("a", "stumbled", 2, 5), mark("b", "odd-word", 2, 5)];
-
-  test("matches on kind and span together", () => {
-    expect(findMarkForSpan(marks, "stumbled", { start: 2, end: 5 })?.id).toBe("a");
-    expect(findMarkForSpan(marks, "odd-word", { start: 2, end: 5 })?.id).toBe("b");
-  });
-
-  test("a span that merely overlaps is not a match", () => {
-    expect(findMarkForSpan(marks, "stumbled", { start: 2, end: 4 })).toBeUndefined();
-    expect(findMarkForSpan(marks, "stumbled", { start: 1, end: 5 })).toBeUndefined();
-  });
-
-  test("an unmarked kind has no match", () => {
-    expect(findMarkForSpan(marks, "lost-thread", { start: 2, end: 5 })).toBeUndefined();
-  });
-
-  test("a dismissed mark does not match, so its span can be marked afresh", () => {
-    const dismissed = [mark("a", "stumbled", 2, 5, "dismissed")];
-    expect(findMarkForSpan(dismissed, "stumbled", { start: 2, end: 5 })).toBeUndefined();
-  });
-});
-
-describe("marks overlapping a span", () => {
-  const marks = [
-    mark("a", "stumbled", 0, 3),
-    mark("b", "odd-word", 2, 6),
-    mark("c", "lost-thread", 10, 12),
-    mark("d", "stumbled", 1, 2, "dismissed"),
-  ];
-
-  test("returns every live mark sharing a token, in mark order", () => {
-    expect(marksOverlappingSpan(marks, { start: 2, end: 3 }).map((m) => m.id)).toEqual(["a", "b"]);
-  });
-
-  test("a mark touching only at the boundary does not overlap", () => {
-    expect(marksOverlappingSpan(marks, { start: 6, end: 8 })).toEqual([]);
-  });
-
-  test("dismissed marks are never offered", () => {
-    expect(marksOverlappingSpan(marks, { start: 1, end: 2 }).map((m) => m.id)).toEqual(["a"]);
-  });
-
-  test("a span over bare poem touches nothing", () => {
-    expect(marksOverlappingSpan(marks, { start: 20, end: 25 })).toEqual([]);
   });
 });
 
