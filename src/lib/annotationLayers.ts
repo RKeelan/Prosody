@@ -11,7 +11,6 @@
  * per-token lookup the renderer can consult in constant time.
  */
 
-import { sameSpan, spansOverlap, type TokenSpan } from "./grade";
 import type { Mark, MarkKind } from "./session/model";
 
 /** One annotation layer: a mark kind, how to label it, and how to colour it. */
@@ -99,30 +98,6 @@ export function buildLayerIndex(
     }
   }
   return index;
-}
-
-/**
- * The live mark of `kind` covering exactly `span`, if there is one. The marker
- * controls use this to read as a toggle: where a span is already marked, the
- * button un-marks it instead of stacking a second identical mark on top.
- */
-export function findMarkForSpan(
-  marks: readonly Mark[],
-  kind: MarkKind,
-  span: TokenSpan,
-): Mark | undefined {
-  return marks.find((m) => m.kind === kind && m.status !== "dismissed" && sameSpan(m.span, span));
-}
-
-/**
- * Every live mark sharing at least one token with `span`, in mark order.
- *
- * This is what makes a mark clearable in practice: un-marking by exact span
- * means reproducing the original selection tap for tap, so the marker bar also
- * lists whatever the current selection merely touches and offers to remove it.
- */
-export function marksOverlappingSpan(marks: readonly Mark[], span: TokenSpan): Mark[] {
-  return marks.filter((m) => m.status !== "dismissed" && spansOverlap(m.span, span));
 }
 
 /**
