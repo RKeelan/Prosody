@@ -125,6 +125,22 @@ export function marksOverlappingSpan(marks: readonly Mark[], span: TokenSpan): M
   return marks.filter((m) => m.status !== "dismissed" && spansOverlap(m.span, span));
 }
 
+/**
+ * The live marks in reading order: earliest span first, and where two marks
+ * start together the shorter one first. Activity 1's mark list renders this, so
+ * the list runs down the poem the way the poem does rather than in the order the
+ * learner happened to mark things.
+ *
+ * Dismissed marks are left out, matching {@link buildLayerIndex}: a mark set
+ * aside at the gate is gone from the poem, and a chip that still offered to
+ * remove it would act on something the learner cannot see.
+ */
+export function marksInReadingOrder(marks: readonly Mark[]): Mark[] {
+  return marks
+    .filter((m) => m.status !== "dismissed")
+    .sort((a, b) => a.span.start - b.span.start || a.span.end - b.span.end);
+}
+
 /** How many marks of each kind the list holds, dismissed ones excluded. */
 export function countMarksByKind(marks: readonly Mark[]): Record<MarkKind, number> {
   const counts = { stumbled: 0, "lost-thread": 0, "odd-word": 0 } satisfies Record<
