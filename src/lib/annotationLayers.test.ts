@@ -5,6 +5,7 @@ import {
   countMarksByKind,
   findMarkForSpan,
   layerFor,
+  marksInReadingOrder,
   marksOverlappingSpan,
 } from "./annotationLayers";
 import { type Mark, MarkKind } from "./session/model";
@@ -116,6 +117,36 @@ describe("marks overlapping a span", () => {
 
   test("a span over bare poem touches nothing", () => {
     expect(marksOverlappingSpan(marks, { start: 20, end: 25 })).toEqual([]);
+  });
+});
+
+describe("reading order", () => {
+  test("orders by where each mark starts, not when it was made", () => {
+    const marks = [mark("c", "stumbled", 9, 11), mark("a", "odd-word", 1, 2)];
+    expect(marksInReadingOrder(marks).map((m) => m.id)).toEqual(["a", "c"]);
+  });
+
+  test("marks starting together put the shorter first", () => {
+    const marks = [mark("long", "stumbled", 4, 9), mark("short", "odd-word", 4, 5)];
+    expect(marksInReadingOrder(marks).map((m) => m.id)).toEqual(["short", "long"]);
+  });
+
+  test("resolved marks are listed; dismissed ones are not", () => {
+    const marks = [
+      mark("a", "stumbled", 0, 1, "resolved"),
+      mark("b", "lost-thread", 1, 2, "dismissed"),
+    ];
+    expect(marksInReadingOrder(marks).map((m) => m.id)).toEqual(["a"]);
+  });
+
+  test("leaves the caller's list untouched", () => {
+    const marks = [mark("c", "stumbled", 9, 11), mark("a", "odd-word", 1, 2)];
+    marksInReadingOrder(marks);
+    expect(marks.map((m) => m.id)).toEqual(["c", "a"]);
+  });
+
+  test("an empty list orders to nothing", () => {
+    expect(marksInReadingOrder([])).toEqual([]);
   });
 });
 

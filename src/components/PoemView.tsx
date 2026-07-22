@@ -24,8 +24,14 @@ interface PoemViewProps {
   tokenised: TokenisedPoem;
   /** The current selection; `EMPTY_SELECTION` renders the poem unhighlighted. */
   selection: Selection;
-  /** Called with a word token's index when the learner taps it. */
-  onTapToken: (index: number) => void;
+  /**
+   * Called with a word token's index when the learner taps it. Omit it to
+   * render the poem inert—every token a plain span, no hover, no hit target.
+   * That is the right reading for an activity that shows the poem without
+   * selecting in it, where tappable words would promise an interaction that
+   * does nothing.
+   */
+  onTapToken?: (index: number) => void;
   /**
    * The tint for a token some layer covers, as Tailwind classes—Activity 1's
    * annotation layers today, Activity 6's device palette or Activity 8's
@@ -91,7 +97,7 @@ export function PoemView({ tokenised, selection, onTapToken, tokenHighlightClass
                       {gapBefore && (
                         <span className={cn("inline-block py-1.5", gapHighlight)}>{gapBefore}</span>
                       )}
-                      {isWordToken(token) ? (
+                      {onTapToken && isWordToken(token) ? (
                         <button
                           type="button"
                           aria-pressed={isTokenSelected(selection, token.index)}

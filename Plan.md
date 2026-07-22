@@ -97,10 +97,11 @@ The one custom token-based component underlying every activity:
 
 One task per activity: its UI, its grading as pure tested modules, wiring into the store (commits, miss lists), and the withholding principle throughout—reference answers render only after the learner commits, and the diff view then shows both side by side.
 
-### Task 9: Activity 1—read silently
+### ~~Task 9: Activity 1—read silently~~
 
 - clean poem text, no apparatus; select a span, mark it stumbled, lost thread, or odd word; marks persist as a toggleable layer in all later activities
 - ungraded; completion is one confirmed pass; unresolved marks feed the Activity 9 gate
+- unmarking is by chip, not by re-selecting: each mark shows as a chip beneath the poem, tapped to remove it; a mark a later activity resolved shows inert, its record preserved (`$Claude`)
 - Richard tests: a real silent read of the fixture poem, marking as he goes; confirm the marks reappear as a layer in a later activity view
 
 ### Task 10: Activity 2—read aloud

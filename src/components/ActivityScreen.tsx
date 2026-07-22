@@ -1,15 +1,24 @@
 /**
- * One activity's screen. Every activity is still a placeholder—it names itself
- * and the Plan.md task that will build its real UI—but from Task 8 the card's
- * body is the poem renderer and its workbench, so the poem is on screen in
- * every activity and the renderer gets exercised wherever the learner is.
- * Stage 3 replaces this component's body, one activity at a time, without
- * touching how it is reached (the nav and the fragment routing in `App.tsx`).
+ * One activity's screen: the real component where Stage 3 has built it, and a
+ * placeholder naming its Plan.md task where it has not.
+ *
+ * A placeholder still renders the poem, with the Activity 1 annotation layers
+ * and their toggles—the marks are meant to travel, and an activity that showed
+ * none of the poem would be a worse stand-in than one that shows it plainly.
+ * The poem is inert there: selecting is an interaction each activity defines
+ * for itself, and none of the unbuilt ones has yet.
+ *
+ * Stage 3 replaces the placeholders one at a time by adding a case here,
+ * without touching how an activity is reached (the nav and the fragment routing
+ * in `App.tsx`). Built or not, every activity wears the same card chrome from
+ * `./ActivityCard`, which takes its heading from `@/lib/activityInfo`.
  */
 
+import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
-import { PoemWorkbench } from "@/components/PoemWorkbench";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ActivityCard } from "@/components/ActivityCard";
+import { PoemPanel } from "@/components/PoemPanel";
+import { ReadSilentlyActivity } from "@/components/ReadSilentlyActivity";
 import type { ActivityInfo } from "@/lib/activityInfo";
 import type { SessionStoreState } from "@/lib/session";
 import type { TokenisedPoem } from "@/lib/tokenise";
@@ -21,19 +30,21 @@ interface ActivityScreenProps {
 }
 
 export function ActivityScreen({ info, tokenised, store }: ActivityScreenProps) {
+  if (info.key === "readSilently") {
+    return <ReadSilentlyActivity info={info} tokenised={tokenised} store={store} />;
+  }
+  return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
+}
+
+function ActivityPlaceholder({ info, tokenised, store }: ActivityScreenProps) {
+  const marks = useStore(store, (s) => s.session.currentAttempt.marks);
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          Activity {info.number}: {info.title}
-        </CardTitle>
-        <CardDescription>
-          Built in Plan.md Task {info.planTask}. Until then, the poem renderer stands in.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <PoemWorkbench tokenised={tokenised} store={store} />
-      </CardContent>
-    </Card>
+    <ActivityCard
+      info={info}
+      description={`Built in Plan.md Task ${info.planTask}. Until then, the poem and your Activity 1 marks stand in.`}
+    >
+      <PoemPanel tokenised={tokenised} marks={marks} />
+    </ActivityCard>
   );
 }
