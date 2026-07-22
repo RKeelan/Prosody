@@ -14,7 +14,7 @@
  */
 
 import { useMemo } from "react";
-import { layOutPoem } from "@/lib/poemLayout";
+import { gutterLabel, layOutPoem } from "@/lib/poemLayout";
 import { isTokenSelected, type Selection } from "@/lib/selection";
 import { isWordToken, type TokenisedPoem } from "@/lib/tokenise";
 import { cn } from "@/lib/utils";
@@ -41,11 +41,6 @@ interface PoemViewProps {
    * unbroken run; the selection outranks whatever this returns.
    */
   tokenHighlightClass?: (index: number) => string | undefined;
-}
-
-/** Every fifth line carries a number, plus the first—enough to navigate by, little enough to ignore. */
-function gutterLabel(number: number): string {
-  return number === 1 || number % 5 === 0 ? String(number) : "";
 }
 
 export function PoemView({ tokenised, selection, onTapToken, tokenHighlightClass }: PoemViewProps) {

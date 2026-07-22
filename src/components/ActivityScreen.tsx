@@ -18,25 +18,31 @@ import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
 import { ActivityCard } from "@/components/ActivityCard";
 import { PoemPanel } from "@/components/PoemPanel";
+import { ReadAloudActivity } from "@/components/ReadAloudActivity";
 import { ReadSilentlyActivity } from "@/components/ReadSilentlyActivity";
 import type { ActivityInfo } from "@/lib/activityInfo";
+import type { Pack } from "@/lib/pack";
 import type { SessionStoreState } from "@/lib/session";
 import type { TokenisedPoem } from "@/lib/tokenise";
 
 interface ActivityScreenProps {
   info: ActivityInfo;
+  pack: Pack;
   tokenised: TokenisedPoem;
   store: StoreApi<SessionStoreState>;
 }
 
-export function ActivityScreen({ info, tokenised, store }: ActivityScreenProps) {
+export function ActivityScreen({ info, pack, tokenised, store }: ActivityScreenProps) {
   if (info.key === "readSilently") {
     return <ReadSilentlyActivity tokenised={tokenised} store={store} />;
+  }
+  if (info.key === "scansion") {
+    return <ReadAloudActivity pack={pack} tokenised={tokenised} store={store} />;
   }
   return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
 }
 
-function ActivityPlaceholder({ info, tokenised, store }: ActivityScreenProps) {
+function ActivityPlaceholder({ info, tokenised, store }: Omit<ActivityScreenProps, "pack">) {
   const marks = useStore(store, (s) => s.session.currentAttempt.marks);
 
   return (

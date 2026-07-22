@@ -104,7 +104,7 @@ One task per activity: its UI, its grading as pure tested modules, wiring into t
 - unmarking is by chip, not by re-selecting: each mark shows as a chip beneath the poem, tapped to remove it; a mark a later activity resolved shows inert, its record preserved (`$Claude`)
 - Richard tests: a real silent read of the fixture poem, marking as he goes; confirm the marks reappear as a layer in a later activity view
 
-### Task 10: Activity 2—read aloud
+### ~~Task 10: Activity 2—read aloud~~
 
 Study For Better for Verse (prosody.lib.virginia.edu) before building—especially how its per-poem notes defend contested scansions.
 

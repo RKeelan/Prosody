@@ -57,7 +57,12 @@ export function StudyShell({
         onSelect={onSelectActivity}
       />
 
-      <ActivityScreen info={activityInfo(activity)} tokenised={tokenised} store={store} />
+      <ActivityScreen
+        info={activityInfo(activity)}
+        pack={pack}
+        tokenised={tokenised}
+        store={store}
+      />
     </main>
   );
 }

@@ -4,7 +4,6 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { minimalPack, type PackInput } from "./pack/fixture";
 import {
-  countSyllablesHeuristic,
   discoverPackFiles,
   type Finding,
   validateFile,
@@ -223,27 +222,23 @@ describe("validatePack—scansion", () => {
   });
 });
 
-describe("countSyllablesHeuristic", () => {
-  test("short words count as one syllable outright", () => {
-    expect(countSyllablesHeuristic("the")).toBe(1);
-    expect(countSyllablesHeuristic("my")).toBe(1);
-  });
-
-  test("strips a silent trailing e", () => {
-    expect(countSyllablesHeuristic("hope")).toBe(1);
-  });
-
-  test("strips a silent e before a trailing s", () => {
-    expect(countSyllablesHeuristic("waves")).toBe(1);
-  });
-
-  test("counts a vowel-letter diphthong as one syllable", () => {
-    expect(countSyllablesHeuristic("boat")).toBe(1);
-    expect(countSyllablesHeuristic("grey")).toBe(1);
-  });
-
-  test("known failure mode: vowel hiatus undercounts ('poem' scans as two syllables)", () => {
-    expect(countSyllablesHeuristic("poem")).toBe(1);
+describe("validatePack—scansion requires explicit syllabification", () => {
+  test("a multi-syllable word with no syllabification entry undercounts and is flagged", () => {
+    // "beneath" is two syllables; drop its entry and the line counts one short.
+    const findings = validatePack(
+      minimalPack({
+        poem: {
+          stanzas: [
+            { lines: ["O boat, you carried all my hope,", "It sank beneath the cold grey waves."] },
+          ],
+          syllabifications: [{ word: { exact: "carried" }, syllables: ["car", "ried"] }],
+        },
+      }),
+    );
+    const finding = findingAt(findings, "scansion.lines[1]");
+    expect(finding).toBeDefined();
+    expect(finding?.message).toContain("beneath(1)");
+    expect(finding?.message).toContain("syllabification");
   });
 });
 
