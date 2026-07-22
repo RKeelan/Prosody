@@ -7,6 +7,7 @@
  * and why.
  */
 
+import type { ActiveActivities } from "./pack";
 import { ACTIVITY_KEYS, type ActivityKey } from "./session";
 
 /** One activity's nav and placeholder-card metadata. */
@@ -47,4 +48,30 @@ const BY_KEY = Object.fromEntries(ACTIVITIES.map((info) => [info.key, info])) as
 /** Look up one activity's display metadata by key. Every {@link ActivityKey} has an entry. */
 export function activityInfo(key: ActivityKey): ActivityInfo {
   return BY_KEY[key];
+}
+
+/**
+ * The enabled activities, in canonical order: the sequence the nav stepper walks.
+ * A pack may switch activities off through its {@link ActiveActivities} flags, and
+ * those drop out here so the stepper never offers one.
+ */
+export function enabledActivities(active: ActiveActivities): ActivityInfo[] {
+  return ACTIVITIES.filter((info) => active[info.key]);
+}
+
+/**
+ * The enabled activity one step from `current` in `direction` (−1 back, +1
+ * forward), or null when there is none—`current` is the first or last enabled
+ * activity. Disabled activities are stepped over, so the stepper lands only on
+ * activities the pack has switched on.
+ */
+export function adjacentActivity(
+  active: ActiveActivities,
+  current: ActivityKey,
+  direction: 1 | -1,
+): ActivityKey | null {
+  const enabled = enabledActivities(active);
+  const index = enabled.findIndex((info) => info.key === current);
+  if (index === -1) return null;
+  return enabled[index + direction]?.key ?? null;
 }
