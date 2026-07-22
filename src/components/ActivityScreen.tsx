@@ -11,7 +11,7 @@
  * Stage 3 replaces the placeholders one at a time by adding a case here,
  * without touching how an activity is reached (the nav and the fragment routing
  * in `App.tsx`). Built or not, every activity wears the same card chrome from
- * `./ActivityCard`, which takes its heading from `@/lib/activityInfo`.
+ * `./ActivityCard`; the activity's name comes from the nav stepper above it.
  */
 
 import { useStore } from "zustand";
@@ -31,7 +31,7 @@ interface ActivityScreenProps {
 
 export function ActivityScreen({ info, tokenised, store }: ActivityScreenProps) {
   if (info.key === "readSilently") {
-    return <ReadSilentlyActivity info={info} tokenised={tokenised} store={store} />;
+    return <ReadSilentlyActivity tokenised={tokenised} store={store} />;
   }
   return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
 }
@@ -41,7 +41,6 @@ function ActivityPlaceholder({ info, tokenised, store }: ActivityScreenProps) {
 
   return (
     <ActivityCard
-      info={info}
       description={`Built in Plan.md Task ${info.planTask}. Until then, the poem and your Activity 1 marks stand in.`}
     >
       <PoemPanel tokenised={tokenised} marks={marks} />

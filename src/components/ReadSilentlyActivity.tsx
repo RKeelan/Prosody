@@ -22,7 +22,6 @@ import { ActivityCard } from "@/components/ActivityCard";
 import { LayerSwatch } from "@/components/LayerSwatch";
 import { PoemPanel } from "@/components/PoemPanel";
 import { Button } from "@/components/ui/button";
-import type { ActivityInfo } from "@/lib/activityInfo";
 import { ANNOTATION_LAYERS, layerFor, marksInReadingOrder } from "@/lib/annotationLayers";
 import {
   clearSelection,
@@ -38,12 +37,11 @@ import type { TokenisedPoem } from "@/lib/tokenise";
 import { cn } from "@/lib/utils";
 
 interface ReadSilentlyActivityProps {
-  info: ActivityInfo;
   tokenised: TokenisedPoem;
   store: StoreApi<SessionStoreState>;
 }
 
-export function ReadSilentlyActivity({ info, tokenised, store }: ReadSilentlyActivityProps) {
+export function ReadSilentlyActivity({ tokenised, store }: ReadSilentlyActivityProps) {
   const marks = useStore(store, (s) => s.session.currentAttempt.marks);
   const committed = useStore(
     store,
@@ -162,10 +160,7 @@ export function ReadSilentlyActivity({ info, tokenised, store }: ReadSilentlyAct
   );
 
   return (
-    <ActivityCard
-      info={info}
-      description="Read the poem through once, without aids. Tap the first and last word of anything that trips you, and mark it—don't stop to work it out. Later activities are where the marks get resolved."
-    >
+    <ActivityCard description="Read the poem through once, without aids. Tap the first and last word of anything that trips you, and mark it—don't stop to work it out. Later activities are where the marks get resolved.">
       <PoemPanel
         tokenised={tokenised}
         marks={marks}
