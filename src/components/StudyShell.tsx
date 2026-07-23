@@ -6,11 +6,12 @@
  * depend on which screen is showing.
  */
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
 import { ActivityNav } from "@/components/ActivityNav";
 import { ActivityScreen } from "@/components/ActivityScreen";
+import { NewAttemptDialog } from "@/components/NewAttemptDialog";
 import { Button } from "@/components/ui/button";
 import { activityInfo } from "@/lib/activityInfo";
 import type { Pack } from "@/lib/pack";
@@ -33,9 +34,12 @@ export function StudyShell({
   onChangePoem,
 }: StudyShellProps) {
   const session = useStore(store, (s) => s.session);
+  const finishAttempt = useStore(store, (s) => s.actions.finishAttempt);
   // Tokenise once per pack, per Vision.md, and hand the same stream to every
   // activity: anchor resolution and grading already speak these indices.
   const tokenised = useMemo(() => tokenisePoem(pack.poem), [pack.poem]);
+
+  const [resetOpen, setResetOpen] = useState(false);
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
@@ -46,10 +50,22 @@ export function StudyShell({
             {pack.poet} · Attempt {session.currentAttempt.index}
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={onChangePoem}>
-          Change poem
-        </Button>
+        <div className="flex shrink-0 gap-2">
+          <Button variant="outline" size="sm" onClick={() => setResetOpen(true)}>
+            New attempt
+          </Button>
+          <Button variant="outline" size="sm" onClick={onChangePoem}>
+            Change poem
+          </Button>
+        </div>
       </header>
+
+      <NewAttemptDialog
+        open={resetOpen}
+        onOpenChange={setResetOpen}
+        attemptIndex={session.currentAttempt.index}
+        onConfirm={finishAttempt}
+      />
 
       <ActivityNav
         activeActivities={pack.activeActivities}
