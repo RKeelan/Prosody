@@ -30,7 +30,8 @@ import {
   type QuoteAnchor,
   type TargetAnswer,
 } from "./pack";
-import { type Token, tokenisePoem } from "./tokenise";
+import { poemSyllables, resolveSyllabifications } from "./syllables";
+import { type Token, type TokenisedPoem, tokenisePoem } from "./tokenise";
 
 /** One validation problem: where in the pack it lives, and what's wrong. */
 export interface Finding {
@@ -207,107 +208,20 @@ function checkActiveActivities(pack: Pack): Finding[] {
 // ---------------------------------------------------------------------------
 
 /**
- * $Claude Heuristic syllable counter, used for any word the pack's
- * syllabification list doesn't cover for its occurrence. This is the common
- * "count vowel-letter groups, strip a silent trailing e" heuristic behind
- * readability-score tools (Flesch-Kincaid and similar)—not a pronunciation
- * model, and not the `prosodic`/CMUdict mechanical checks Vision.md's
- * authoring pipeline describes for a future task. Verified against every
- * heuristic-counted word in the fixture pack.
- *
- * Known failure modes: vowel hiatus—adjacent vowel letters that are two
- * syllables, not a diphthong ("poem", "create", "idea")—undercounts, since
- * the heuristic treats any run of vowel letters as one syllable; archaic or
- * unusual spellings can go either way. When it misfires, the fix is a
- * syllabification entry for that word, not a change to this function—the
- * mismatch message below says so.
- */
-export function countSyllablesHeuristic(word: string): number {
-  const w = word.toLowerCase().replace(/[^a-z]/g, "");
-  if (w.length === 0) return 0;
-  if (w.length <= 3) return 1;
-  const reduced = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "").replace(/^y/, "");
-  const groups = reduced.match(/[aeiouy]{1,2}/g);
-  return groups ? Math.max(1, groups.length) : 1;
-}
-
-/** A syllabification entry whose anchor resolved, with the syllable count it asserts. */
-interface ResolvedSyllabification {
-  /** Index into `pack.poem.syllabifications`. */
-  index: number;
-  span: TokenSpan;
-  count: number;
-}
-
-function resolveSyllabifications(pack: Pack, tokens: readonly Token[]): ResolvedSyllabification[] {
-  const resolved: ResolvedSyllabification[] = [];
-  pack.poem.syllabifications.forEach((s, index) => {
-    const result = resolveAnchor(tokens, s.word);
-    if (result.status === "resolved") {
-      resolved.push({ index, span: result.span, count: s.syllables.length });
-    }
-  });
-  return resolved;
-}
-
-interface WordCount {
-  text: string;
-  count: number;
-  fromSyllabification: boolean;
-}
-
-/**
- * The syllable count for every word in one line: a syllabification entry
- * covering a word's occurrence wins; otherwise {@link countSyllablesHeuristic}
- * applies. A syllabification's span may cover more than one token only in the
- * unusual case its anchor matches more than a single word—treated as one
- * counting unit regardless, since the syllable count describes the whole span.
- */
-function lineWordCounts(
-  tokens: readonly Token[],
-  lineIndex: number,
-  syllabifications: readonly ResolvedSyllabification[],
-): WordCount[] {
-  const lineTokens = tokens.filter((t) => t.lineIndex === lineIndex);
-  const results: WordCount[] = [];
-  let i = 0;
-  while (i < lineTokens.length) {
-    const token = lineTokens[i];
-    if (token.kind !== "word") {
-      i++;
-      continue;
-    }
-    const covering = syllabifications.find((s) => s.span.start === token.index);
-    if (covering) {
-      const spanLength = covering.span.end - covering.span.start;
-      const text = tokens
-        .slice(covering.span.start, covering.span.end)
-        .map((t) => t.text)
-        .join("");
-      results.push({ text, count: covering.count, fromSyllabification: true });
-      i += spanLength;
-    } else {
-      results.push({
-        text: token.text,
-        count: countSyllablesHeuristic(token.text),
-        fromSyllabification: false,
-      });
-      i++;
-    }
-  }
-  return results;
-}
-
-/**
  * scansion.lines.length must match the poem's line count, and each line's
- * scanned syllable count must match the text (syllabification where it
- * applies, the heuristic otherwise). A line-count mismatch makes per-line
- * comparison meaningless, so it short-circuits the rest of this check—but not
- * the pack's other checks, which still run.
+ * scanned syllable count must match the text. Syllable divisions come from the
+ * shared projection in `./syllables`: a word with a syllabification entry takes
+ * its chunks, and a word without one counts as a single syllable. A
+ * multi-syllable word left unsyllabified therefore counts short, and the
+ * mismatch surfaces here—which is what forces every such word to be
+ * syllabified, so Activity 2 can split it into tappable chips. A line-count
+ * mismatch makes per-line comparison meaningless, so it short-circuits the rest
+ * of this check—but not the pack's other checks, which still run.
  */
-function checkScansion(pack: Pack, tokens: readonly Token[], lineCount: number): Finding[] {
+function checkScansion(pack: Pack, tokenised: TokenisedPoem): Finding[] {
   if (!pack.scansion) return [];
   const findings: Finding[] = [];
+  const lineCount = tokenised.lines.length;
 
   if (pack.scansion.lines.length !== lineCount) {
     findings.push({
@@ -317,20 +231,19 @@ function checkScansion(pack: Pack, tokens: readonly Token[], lineCount: number):
     return findings;
   }
 
-  const syllabifications = resolveSyllabifications(pack, tokens);
+  const resolved = resolveSyllabifications(tokenised.tokens, pack.poem.syllabifications);
+  const lineSyllables = poemSyllables(tokenised, resolved);
   pack.scansion.lines.forEach((scansionLine, lineIndex) => {
-    const words = lineWordCounts(tokens, lineIndex, syllabifications);
-    const counted = words.reduce((sum, w) => sum + w.count, 0);
+    const line = lineSyllables[lineIndex];
+    const counted = line.syllableCount;
     const expected = scansionLine.syllables.length;
     if (counted !== expected) {
-      const breakdown = words.map((w) => `${w.text}(${w.count})`).join(" ");
-      const usedHeuristic = words.some((w) => !w.fromSyllabification);
-      const suggestion = usedHeuristic
-        ? " If the heuristic miscounted a word, add or correct a syllabification entry for it; otherwise fix the scansion."
-        : " The pack's syllabifications disagree with the scansion; fix one or the other.";
+      const breakdown = line.words.map((w) => `${w.text}(${w.syllables.length})`).join(" ");
       findings.push({
         location: `scansion.lines[${lineIndex}]`,
-        message: `line ${lineIndex} scans ${expected} syllable(s) but the text counts ${counted}: ${breakdown}.${suggestion}`,
+        message:
+          `line ${lineIndex} scans ${expected} syllable(s) but the text counts ${counted}: ${breakdown}. ` +
+          "If a word of more than one syllable lacks a syllabification entry, add one; otherwise fix the scansion.",
       });
     }
   });
@@ -367,7 +280,7 @@ function checkSyllabificationConcatenation(pack: Pack, tokens: readonly Token[])
 function checkElisionConsistency(pack: Pack, tokens: readonly Token[]): Finding[] {
   if (!pack.scansion) return [];
   const findings: Finding[] = [];
-  const syllabifications = resolveSyllabifications(pack, tokens);
+  const syllabifications = resolveSyllabifications(tokens, pack.poem.syllabifications);
 
   pack.scansion.elisionQuestions.forEach((q, i) => {
     const result = resolveAnchor(tokens, q.anchor);
@@ -376,12 +289,12 @@ function checkElisionConsistency(pack: Pack, tokens: readonly Token[]): Finding[
     if (!match) return; // no syllabification for this word occurrence—nothing to cross-check
 
     const accepted = [q.syllableCount.answer, ...q.syllableCount.alternates];
-    if (!accepted.includes(match.count)) {
+    if (!accepted.includes(match.syllables.length)) {
       findings.push({
         location: `scansion.elisionQuestions[${i}].syllableCount`,
         message:
           `accepts ${JSON.stringify(accepted)} syllable(s), but poem.syllabifications[${match.index}] ` +
-          `divides the same word into ${match.count}.`,
+          `divides the same word into ${match.syllables.length}.`,
       });
     }
   });
@@ -557,12 +470,13 @@ export function validatePack(raw: unknown): Finding[] {
   }
 
   const pack = parsed.data;
-  const { tokens, lines } = tokenisePoem(pack.poem);
+  const tokenised = tokenisePoem(pack.poem);
+  const { tokens, lines } = tokenised;
 
   return [
     ...checkAnchors(pack, tokens),
     ...checkActiveActivities(pack),
-    ...checkScansion(pack, tokens, lines.length),
+    ...checkScansion(pack, tokenised),
     ...checkSyllabificationConcatenation(pack, tokens),
     ...checkElisionConsistency(pack, tokens),
     ...checkRhyme(pack, lines.length),

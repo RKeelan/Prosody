@@ -81,6 +81,16 @@ export function layOutPoem(tokenised: TokenisedPoem): LaidOutStanza[] {
   return stanzas;
 }
 
+/**
+ * The margin label for a line: every fifth line carries its number, plus the
+ * first—enough to navigate by, little enough to ignore. An empty string
+ * elsewhere. Shared by every poem renderer so the gutter reads the same
+ * throughout.
+ */
+export function gutterLabel(lineNumber: number): string {
+  return lineNumber === 1 || lineNumber % 5 === 0 ? String(lineNumber) : "";
+}
+
 /** Pair each of a line's tokens with the source text separating it from the previous one. */
 function layOutLine(text: string, tokens: readonly Token[]): LaidOutToken[] {
   let cursor = 0;

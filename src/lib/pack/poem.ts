@@ -19,12 +19,19 @@ export const Stanza = z.object({
 export type Stanza = z.infer<typeof Stanza>;
 
 /**
- * How a single word divides into syllables, supplied only where the reference
- * scansion hinges on the division (elision, expansion, disyllabic-or-not calls).
- * The word is located by anchor; the syllables are its parts in order.
+ * How a single word divides into syllables. The word is located by anchor; the
+ * syllables are its parts in order.
  *
- * $Claude Plan.md files syllable divisions under "poem text", so they live here
- * rather than under scansion, even though Activity 2 is what consumes them.
+ * $Claude Activity 2 renders each word as tappable syllable chips, so every word
+ * of more than one syllable needs an entry here—the renderer and grader read
+ * these divisions, and a word without one is taken as a single syllable, which
+ * the validator's scansion line-count check then flags. Monosyllables need no
+ * entry. Divisions are the natural ones, except where the metre elides ("trav-
+ * eller" as two, "O-zy-man-dias" as four), which the paired elision
+ * micro-questions surface.
+ *
+ * Plan.md files syllable divisions under "poem text", so they live here rather
+ * than under scansion, even though Activity 2 is what consumes them.
  */
 export const Syllabification = z.object({
   word: QuoteAnchor,

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import type { Poem } from "./pack";
-import { layOutPoem } from "./poemLayout";
+import { gutterLabel, layOutPoem } from "./poemLayout";
 import { tokenisePoem } from "./tokenise";
 
 function poemOf(...stanzas: string[][]): Poem {
@@ -11,6 +11,22 @@ function poemOf(...stanzas: string[][]): Poem {
 function rebuild(tokens: readonly { gapBefore: string; token: { text: string } }[]): string {
   return tokens.map((t) => t.gapBefore + t.token.text).join("");
 }
+
+describe("gutterLabel", () => {
+  test("labels the first line and every fifth line, nothing else", () => {
+    expect([1, 2, 3, 4, 5, 6, 10, 14, 15].map(gutterLabel)).toEqual([
+      "1",
+      "",
+      "",
+      "",
+      "5",
+      "",
+      "10",
+      "",
+      "15",
+    ]);
+  });
+});
 
 describe("stanza and line grouping", () => {
   test("groups lines under their stanzas", () => {

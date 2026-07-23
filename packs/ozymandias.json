@@ -38,9 +38,29 @@
     "syllabifications": [
       { "word": { "exact": "traveller" }, "syllables": ["trav", "eller"] },
       { "word": { "exact": "antique" }, "syllables": ["an", "tique"] },
+      { "word": { "exact": "trunkless" }, "syllables": ["trunk", "less"] },
+      { "word": { "exact": "desert" }, "syllables": ["des", "ert"] },
+      { "word": { "exact": "shattered" }, "syllables": ["shat", "tered"] },
+      { "word": { "exact": "visage" }, "syllables": ["vis", "age"] },
       { "word": { "exact": "wrinkled" }, "syllables": ["wrin", "kled"] },
+      { "word": { "exact": "command" }, "syllables": ["com", "mand"] },
+      { "word": { "exact": "sculptor" }, "syllables": ["sculp", "tor"] },
+      { "word": { "exact": "passions" }, "syllables": ["pas", "sions"] },
+      { "word": { "exact": "survive" }, "syllables": ["sur", "vive"] },
       { "word": { "exact": "lifeless" }, "syllables": ["life", "less"] },
-      { "word": { "exact": "Ozymandias" }, "syllables": ["O", "zy", "man", "dias"] }
+      { "word": { "exact": "pedestal" }, "syllables": ["ped", "es", "tal"] },
+      { "word": { "exact": "appear" }, "syllables": ["ap", "pear"] },
+      { "word": { "exact": "Ozymandias" }, "syllables": ["O", "zy", "man", "dias"] },
+      { "word": { "exact": "Mighty" }, "syllables": ["Might", "y"] },
+      { "word": { "exact": "despair" }, "syllables": ["de", "spair"] },
+      { "word": { "exact": "Nothing" }, "syllables": ["Noth", "ing"] },
+      { "word": { "exact": "beside" }, "syllables": ["be", "side"] },
+      { "word": { "exact": "remains" }, "syllables": ["re", "mains"] },
+      { "word": { "exact": "decay" }, "syllables": ["de", "cay"] },
+      { "word": { "exact": "colossal" }, "syllables": ["co", "los", "sal"] },
+      { "word": { "exact": "boundless" }, "syllables": ["bound", "less"] },
+      { "word": { "exact": "level" }, "syllables": ["lev", "el"] },
+      { "word": { "exact": "away" }, "syllables": ["a", "way"] }
     ]
   },
   "scansion": {
