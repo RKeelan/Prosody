@@ -4,6 +4,7 @@ import {
   buildLayerIndex,
   countMarksByKind,
   layerFor,
+  layerHighlight,
   marksInReadingOrder,
 } from "./annotationLayers";
 import { type Mark, MarkKind } from "./session/model";
@@ -28,6 +29,8 @@ describe("the layer table", () => {
   test("gives each layer its own colour", () => {
     const tints = new Set(ANNOTATION_LAYERS.map((l) => l.tokenClassName));
     expect(tints.size).toBe(ANNOTATION_LAYERS.length);
+    const underlines = new Set(ANNOTATION_LAYERS.map((l) => l.underlineColor));
+    expect(underlines.size).toBe(ANNOTATION_LAYERS.length);
   });
 });
 
@@ -67,6 +70,41 @@ describe("the per-token index", () => {
     const index = buildLayerIndex(marks, ALL_KINDS);
     expect(index.get(0)).toEqual(["stumbled"]);
     expect(index.has(1)).toBe(false);
+  });
+});
+
+describe("token highlight", () => {
+  test("no covering layers means no tint", () => {
+    expect(layerHighlight([])).toBeUndefined();
+  });
+
+  test("a single layer tints the background and underlines nothing", () => {
+    expect(layerHighlight(["stumbled"])).toEqual({
+      key: "stumbled",
+      className: layerFor("stumbled").tokenClassName,
+      boxShadow: undefined,
+    });
+  });
+
+  test("the top layer paints the background, whatever else covers the token", () => {
+    const tint = layerHighlight(["lost-thread", "odd-word"]);
+    expect(tint?.className).toBe(layerFor("lost-thread").tokenClassName);
+    expect(tint?.className).not.toBe(layerFor("odd-word").tokenClassName);
+  });
+
+  test("each lower layer adds a strip in its own colour, stacked upward", () => {
+    const tint = layerHighlight(["stumbled", "lost-thread", "odd-word"]);
+    expect(tint?.key).toBe("stumbled|lost-thread|odd-word");
+    expect(tint?.boxShadow).toBe(
+      `inset 0 -3px 0 0 ${layerFor("lost-thread").underlineColor}, ` +
+        `inset 0 -6px 0 0 ${layerFor("odd-word").underlineColor}`,
+    );
+  });
+
+  test("the background layer never underlines itself", () => {
+    const tint = layerHighlight(["lost-thread", "odd-word"]);
+    expect(tint?.boxShadow).toBe(`inset 0 -3px 0 0 ${layerFor("odd-word").underlineColor}`);
+    expect(tint?.boxShadow).not.toContain(layerFor("lost-thread").underlineColor);
   });
 });
 

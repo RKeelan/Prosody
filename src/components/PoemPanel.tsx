@@ -21,7 +21,7 @@ import {
   ANNOTATION_LAYERS,
   buildLayerIndex,
   countMarksByKind,
-  layerFor,
+  layerHighlight,
 } from "@/lib/annotationLayers";
 import { EMPTY_SELECTION, type Selection } from "@/lib/selection";
 import type { Mark, MarkKind } from "@/lib/session";
@@ -56,12 +56,13 @@ export function PoemPanel({ tokenised, marks, selecting, children, controls }: P
   const layerIndex = useMemo(() => buildLayerIndex(marks, visible), [marks, visible]);
   const counts = useMemo(() => countMarksByKind(marks), [marks]);
 
-  // Resolve a mark kind to its tint here, not in the renderer: `PoemView`
-  // composes tints without knowing that Activity 1's marks are what produced
-  // them. Where layers overlap, the first in table order supplies the tint.
-  const tokenHighlightClass = (index: number): string | undefined => {
-    const kind = layerIndex.get(index)?.[0];
-    return kind === undefined ? undefined : layerFor(kind).tokenClassName;
+  // Resolve the layers covering a token to a tint here, not in the renderer:
+  // `PoemView` composes tints without knowing that Activity 1's marks are what
+  // produced them. The first layer in table order paints the background; every
+  // layer below it underlines, so an overlap hides nothing.
+  const tokenTint = (index: number) => {
+    const kinds = layerIndex.get(index);
+    return kinds ? layerHighlight(kinds) : undefined;
   };
 
   const toggleLayer = (kind: MarkKind) => {
@@ -78,7 +79,7 @@ export function PoemPanel({ tokenised, marks, selecting, children, controls }: P
         tokenised={tokenised}
         selection={selecting?.selection ?? EMPTY_SELECTION}
         onTapToken={selecting?.onTapToken}
-        tokenHighlightClass={tokenHighlightClass}
+        tokenTint={tokenTint}
       />
 
       {children}

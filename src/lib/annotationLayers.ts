@@ -22,6 +22,12 @@ export interface AnnotationLayer {
   readonly tokenClassName: string;
   /** Tailwind classes for the toggle's colour swatch. */
   readonly swatchClassName: string;
+  /**
+   * The colour of this layer's underline strip when a higher-priority layer
+   * owns the token's background—a saturated tone that reads over any of the
+   * pastel tints {@link tokenClassName} paints. See {@link layerHighlight}.
+   */
+  readonly underlineColor: string;
 }
 
 /**
@@ -40,18 +46,21 @@ export const ANNOTATION_LAYERS: readonly AnnotationLayer[] = [
     label: "Stumbled",
     tokenClassName: "bg-amber-200/80 dark:bg-amber-400/30",
     swatchClassName: "bg-amber-300 dark:bg-amber-400/60",
+    underlineColor: "var(--color-amber-500)",
   },
   {
     kind: "lost-thread",
     label: "Lost the thread",
     tokenClassName: "bg-sky-200/80 dark:bg-sky-400/30",
     swatchClassName: "bg-sky-300 dark:bg-sky-400/60",
+    underlineColor: "var(--color-sky-500)",
   },
   {
     kind: "odd-word",
     label: "Odd word",
     tokenClassName: "bg-violet-200/80 dark:bg-violet-400/30",
     swatchClassName: "bg-violet-300 dark:bg-violet-400/60",
+    underlineColor: "var(--color-violet-500)",
   },
 ];
 
@@ -98,6 +107,50 @@ export function buildLayerIndex(
     }
   }
   return index;
+}
+
+/**
+ * A token's tint, ready for the renderer: a background class, plus the stacked
+ * underline strips that keep every covering layer visible.
+ */
+export interface LayerTint {
+  /**
+   * Identity of the covering-kind set, so the renderer fills the gap between two
+   * tokens exactly when the same layers cover both. See `PoemView`'s `TokenTint`.
+   */
+  readonly key: string;
+  /** Background classes: the highest-priority covering layer's tint. */
+  readonly className: string;
+  /**
+   * A CSS `box-shadow` of one underline strip per lower layer, stacked upward in
+   * priority order, or `undefined` when a single layer covers the token.
+   */
+  readonly boxShadow?: string;
+}
+
+/** Thickness in pixels of each underline strip. */
+const UNDERLINE_PX = 3;
+
+/**
+ * Turn the kinds covering a token—one entry from {@link buildLayerIndex}, in
+ * priority order—into a tint. The first kind paints the background; every kind
+ * below it adds an underline strip in its own colour, so a word two layers mark
+ * shows both instead of hiding the lower one under the higher. Returns
+ * `undefined` for a token no layer covers.
+ */
+export function layerHighlight(kinds: readonly MarkKind[]): LayerTint | undefined {
+  const [primary, ...extras] = kinds;
+  if (primary === undefined) return undefined;
+  const boxShadow =
+    extras.length === 0
+      ? undefined
+      : extras
+          .map(
+            (kind, i) =>
+              `inset 0 -${UNDERLINE_PX * (i + 1)}px 0 0 ${layerFor(kind).underlineColor}`,
+          )
+          .join(", ");
+  return { key: kinds.join("|"), className: layerFor(primary).tokenClassName, boxShadow };
 }
 
 /**
