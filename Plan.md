@@ -91,7 +91,12 @@ The one custom token-based component underlying every activity:
 - the renderer has no activity to live in until Stage 3, so it ships behind a workbench (`PoemWorkbench`) that stands in for every activity screen: tap a span, mark it, toggle the layers. Task 9 absorbs the marker controls into the real Activity 1 (`$Claude`)
 - Richard tests: at phone width, or better on his phone—tap-select spans within and across lines, adjust and clear a selection, toggle annotation layers
 
-### Task 8.1: Handle overlapping marked spans
+### ~~Task 8.1: Handle overlapping marked spans~~
+
+Where marks overlap a word, the top layer in table order paints its background
+and each lower layer adds a coloured underline strip, so no toggled-on layer
+hides beneath another. The per-mark chips stay the way any single mark is
+removed.
 
 ## Stage 3: activities
 
