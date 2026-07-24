@@ -159,6 +159,25 @@ describe("miss lists", () => {
     });
   });
 
+  test("setMisses replaces the whole list, so a reconsidered grade can drop a miss", () => {
+    const store = makeStore();
+    const { setMisses } = store.getState().actions;
+    setMisses("pronouns", [
+      { id: "pronoun-0", description: "“it” missed" },
+      { id: "pronoun-1", description: "“these” missed" },
+    ]);
+    expect(activity(store.getState(), "pronouns").misses.map((m) => m.id)).toEqual([
+      "pronoun-0",
+      "pronoun-1",
+    ]);
+    // The learner regrades pronoun 0 as a match: it drops off the list entirely.
+    setMisses("pronouns", [{ id: "pronoun-1", description: "“these” missed" }]);
+    const misses = activity(store.getState(), "pronouns").misses;
+    expect(misses).toEqual([
+      { id: "pronoun-1", source: "pronouns", description: "“these” missed", status: "open" },
+    ]);
+  });
+
   test("clears and dismisses misses by id", () => {
     const store = makeStore();
     const { recordMiss, clearMiss, dismissMiss } = store.getState().actions;

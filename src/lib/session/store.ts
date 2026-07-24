@@ -153,6 +153,15 @@ export interface SessionActions {
   dismissMark(id: string): void;
   /** Record a miss under an activity. A duplicate id within that activity is ignored. */
   recordMiss(activity: ActivityKey, miss: { id: string; description: string }): void;
+  /**
+   * Replace an activity's whole miss list. The self-graded activities recompute
+   * their misses from the learner's grading of the revealed reference, and a
+   * grade the learner reconsiders must be able to drop a miss again—which the
+   * add-only {@link SessionActions.recordMiss} cannot. Every replacement miss is
+   * `open`; any gate-side status is reset, which is why this is the activity's
+   * own tool, not the gate's.
+   */
+  setMisses(activity: ActivityKey, misses: readonly { id: string; description: string }[]): void;
   /** Clear a miss (resolved at the gate). */
   clearMiss(activity: ActivityKey, id: string): void;
   /** Dismiss a miss (consciously set aside at the gate). */
@@ -253,6 +262,21 @@ export function createSessionStore(config: SessionStoreConfig): StoreApi<Session
             };
             return { ...a, misses: [...a.misses, created] };
           }),
+        ),
+
+      setMisses: (activity, misses) =>
+        apply((s) =>
+          updateActivity(s, activity, (a) => ({
+            ...a,
+            misses: misses.map(
+              (m): Miss => ({
+                id: m.id,
+                source: activity,
+                description: m.description,
+                status: "open",
+              }),
+            ),
+          })),
         ),
 
       clearMiss: (activity, id) => apply((s) => setMissStatus(s, activity, id, "cleared")),

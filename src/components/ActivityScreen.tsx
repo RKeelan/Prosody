@@ -18,6 +18,7 @@ import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
 import { ActivityCard } from "@/components/ActivityCard";
 import { PoemPanel } from "@/components/PoemPanel";
+import { PronounsActivity } from "@/components/PronounsActivity";
 import { ReadAloudActivity } from "@/components/ReadAloudActivity";
 import { ReadSilentlyActivity } from "@/components/ReadSilentlyActivity";
 import type { ActivityInfo } from "@/lib/activityInfo";
@@ -38,6 +39,9 @@ export function ActivityScreen({ info, pack, tokenised, store }: ActivityScreenP
   }
   if (info.key === "scansion") {
     return <ReadAloudActivity pack={pack} tokenised={tokenised} store={store} />;
+  }
+  if (info.key === "pronouns") {
+    return <PronounsActivity pack={pack} tokenised={tokenised} store={store} />;
   }
   return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
 }

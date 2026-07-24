@@ -35,7 +35,7 @@ Packs are authored entirely by AI (Claude Fable, driven by the project skill). A
 
 Read the poem once, without aids. Mark (but do not resolve) any line where you stumble or lose the thread.
 
-- Realized in artifact as: Clean poem text, no apparatus. Select any span → a marker menu offers "stumbled," "lost thread," "odd word." Annotations get a colour per type and persist as a layer visible (toggleable) in all later activities.
+- Realized in artifact as: Clean poem text, no apparatus. Select any span → a marker menu offers "stumbled," "lost thread," "odd word." Annotations get a colour per type and persist for the rest of the session, but the marking UI belongs to Activity 1 alone: the marks resurface at the Activity 9 gate to be resolved or dismissed, not as a layer over the later activities.
 - Evaluated by: Not graded. Completion = at least one pass confirmed. The annotation layer is the output; later activities check whether each mark got resolved.
 
 ## Activity 2: Read aloud

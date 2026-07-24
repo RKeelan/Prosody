@@ -114,7 +114,7 @@ Study For Better for Verse (prosody.lib.virginia.edu) before building—especial
 - the heaviest activity; split the marking UI and the diff view into two PRs if needed
 - Richard tests: a full stress-and-rhyme pass on the fixture poem, then commit; check the % agreement, mismatch highlighting, and deviation notes all read well at phone width
 
-### Task 11: Activity 3—pronouns and demonstratives
+### ~~Task 11: Activity 3—pronouns and demonstratives~~
 
 - target pronouns rendered as chips; answer by highlighting the antecedent span or typing it for implied/extratextual antecedents; N-of-M progress meter
 - span answers auto-checked (exact/overlap) with recorded alternates where ambiguity is the poem's point; typed answers self-graded match/partial/miss; misses tracked
