@@ -325,6 +325,12 @@
   },
   "pronouns": [
     {
+      "pronoun": { "exact": "Who" },
+      "antecedent": {
+        "answer": { "kind": "span", "anchor": { "exact": "traveller" } }
+      }
+    },
+    {
       "pronoun": { "exact": "them", "prefix": "Near" },
       "antecedent": {
         "answer": { "kind": "span", "anchor": { "exact": "trunkless legs" } },
