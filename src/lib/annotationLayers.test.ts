@@ -4,6 +4,7 @@ import {
   buildLayerIndex,
   countMarksByKind,
   layerFor,
+  layerHighlight,
   marksInReadingOrder,
 } from "./annotationLayers";
 import { type Mark, MarkKind } from "./session/model";
@@ -28,6 +29,8 @@ describe("the layer table", () => {
   test("gives each layer its own colour", () => {
     const tints = new Set(ANNOTATION_LAYERS.map((l) => l.tokenClassName));
     expect(tints.size).toBe(ANNOTATION_LAYERS.length);
+    const strips = new Set(ANNOTATION_LAYERS.map((l) => l.stripColor));
+    expect(strips.size).toBe(ANNOTATION_LAYERS.length);
   });
 });
 
@@ -67,6 +70,41 @@ describe("the per-token index", () => {
     const index = buildLayerIndex(marks, ALL_KINDS);
     expect(index.get(0)).toEqual(["stumbled"]);
     expect(index.has(1)).toBe(false);
+  });
+});
+
+describe("token highlight", () => {
+  test("no covering layers means no tint", () => {
+    expect(layerHighlight([])).toBeUndefined();
+  });
+
+  test("a single layer tints the background and adds no strip", () => {
+    expect(layerHighlight(["stumbled"])).toEqual({
+      key: "stumbled",
+      className: layerFor("stumbled").tokenClassName,
+      boxShadow: undefined,
+    });
+  });
+
+  test("the top layer paints the background, whatever else covers the token", () => {
+    const tint = layerHighlight(["lost-thread", "odd-word"]);
+    expect(tint?.className).toBe(layerFor("lost-thread").tokenClassName);
+    expect(tint?.className).not.toBe(layerFor("odd-word").tokenClassName);
+  });
+
+  test("the first lower layer underlines, a second overlines instead of crowding", () => {
+    const tint = layerHighlight(["stumbled", "lost-thread", "odd-word"]);
+    expect(tint?.key).toBe("stumbled|lost-thread|odd-word");
+    expect(tint?.boxShadow).toBe(
+      `inset 0 -3px 0 0 ${layerFor("lost-thread").stripColor}, ` +
+        `inset 0 3px 0 0 ${layerFor("odd-word").stripColor}`,
+    );
+  });
+
+  test("the background layer never strips itself", () => {
+    const tint = layerHighlight(["lost-thread", "odd-word"]);
+    expect(tint?.boxShadow).toBe(`inset 0 -3px 0 0 ${layerFor("odd-word").stripColor}`);
+    expect(tint?.boxShadow).not.toContain(layerFor("lost-thread").stripColor);
   });
 });
 
