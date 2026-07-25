@@ -21,6 +21,7 @@ import { PoemPanel } from "@/components/PoemPanel";
 import { PronounsActivity } from "@/components/PronounsActivity";
 import { ReadAloudActivity } from "@/components/ReadAloudActivity";
 import { ReadSilentlyActivity } from "@/components/ReadSilentlyActivity";
+import { SentencesActivity } from "@/components/SentencesActivity";
 import type { ActivityInfo } from "@/lib/activityInfo";
 import type { Pack } from "@/lib/pack";
 import type { SessionStoreState } from "@/lib/session";
@@ -42,6 +43,9 @@ export function ActivityScreen({ info, pack, tokenised, store }: ActivityScreenP
   }
   if (info.key === "pronouns") {
     return <PronounsActivity pack={pack} tokenised={tokenised} store={store} />;
+  }
+  if (info.key === "sentences") {
+    return <SentencesActivity pack={pack} tokenised={tokenised} store={store} />;
   }
   return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
 }

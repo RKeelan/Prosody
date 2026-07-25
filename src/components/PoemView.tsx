@@ -13,7 +13,7 @@
  * tap single words without this file learning about either.
  */
 
-import { type CSSProperties, useMemo } from "react";
+import { type CSSProperties, type ReactNode, useMemo } from "react";
 import { gutterLabel, layOutPoem } from "@/lib/poemLayout";
 import { isTokenSelected, type Selection } from "@/lib/selection";
 import { isWordToken, type TokenisedPoem } from "@/lib/tokenise";
@@ -40,6 +40,14 @@ interface PoemViewProps {
    * The selection outranks whatever this returns.
    */
   tokenTint?: (index: number) => TokenTint | undefined;
+  /**
+   * An inline node rendered immediately before a token, after the space that
+   * precedes it, so it sits inside any tinted run the token starts—Activity 4's
+   * numbered sentence markers today, a device or allusion tag later. Return
+   * `undefined` for every token that carries none. Like {@link tokenTint}, an
+   * opaque hook: this component places the node, it does not know what it marks.
+   */
+  renderLead?: (index: number) => ReactNode;
 }
 
 /**
@@ -60,7 +68,13 @@ export interface TokenTint {
   readonly key?: string;
 }
 
-export function PoemView({ tokenised, selection, onTapToken, tokenTint }: PoemViewProps) {
+export function PoemView({
+  tokenised,
+  selection,
+  onTapToken,
+  tokenTint,
+  renderLead,
+}: PoemViewProps) {
   const stanzas = useMemo(() => layOutPoem(tokenised), [tokenised]);
   const pendingAnchor = selection.phase === "anchored" ? selection.anchor : null;
 
@@ -83,7 +97,7 @@ export function PoemView({ tokenised, selection, onTapToken, tokenTint }: PoemVi
             <div key={line.lineIndex} className="flex items-baseline gap-1">
               <span
                 aria-hidden="true"
-                className="w-5 shrink-0 text-right font-mono text-muted-foreground text-xs tabular-nums"
+                className="w-6 shrink-0 pr-1 text-right font-mono text-muted-foreground text-xs tabular-nums"
               >
                 {gutterLabel(line.number)}
               </span>
@@ -117,6 +131,7 @@ export function PoemView({ tokenised, selection, onTapToken, tokenTint }: PoemVi
                           {gapBefore}
                         </span>
                       )}
+                      {renderLead?.(token.index)}
                       {onTapToken && isWordToken(token) ? (
                         <button
                           type="button"

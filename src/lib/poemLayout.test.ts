@@ -13,16 +13,16 @@ function rebuild(tokens: readonly { gapBefore: string; token: { text: string } }
 }
 
 describe("gutterLabel", () => {
-  test("labels the first line and every fifth line, nothing else", () => {
+  test("labels every line with its number", () => {
     expect([1, 2, 3, 4, 5, 6, 10, 14, 15].map(gutterLabel)).toEqual([
       "1",
-      "",
-      "",
-      "",
+      "2",
+      "3",
+      "4",
       "5",
-      "",
+      "6",
       "10",
-      "",
+      "14",
       "15",
     ]);
   });
