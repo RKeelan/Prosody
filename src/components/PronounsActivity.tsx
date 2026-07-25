@@ -338,10 +338,10 @@ export function PronounsActivity({ pack, tokenised, store }: PronounsActivityPro
           tokenised={tokenised}
           selection={selection}
           onTapToken={handleTap}
-          tokenHighlightClass={(index) => {
+          tokenTint={(index) => {
             const pronoun = located.tokenToPronoun.get(index);
             if (pronoun === undefined) return undefined;
-            return pronoun === active ? PRONOUN_ACTIVE_CLASS : PRONOUN_CLASS;
+            return { className: pronoun === active ? PRONOUN_ACTIVE_CLASS : PRONOUN_CLASS };
           }}
         />
         {controls}
