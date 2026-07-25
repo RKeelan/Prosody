@@ -62,10 +62,10 @@ Work sentence by sentence, not line by line.
 
 ## Activity 5: Gloss the diction
 
-Define every word you cannot define precisely, and every word used oddly.
+Find the poem's loaded words—the ones it uses in two senses at once—and work out both meanings in play.
 
-- Realized in artifact as: Every word tappable → "add gloss" opens a definition field. Words the data pack marks as *odd usage* are visually dotted-underlined only *after* the learner commits their gloss list (so the hunt is theirs first); odd-usage entries require stating both senses the word carries.
-- Evaluated by: Coverage check: did the learner gloss the words the pack flags as essential? Misses revealed as a list. Definitions self-graded against pack glosses.
+- Realized in artifact as: The data pack's loaded words are highlighted in the poem from the start. Tapping one opens two fields for the two senses it carries at once, which the learner works out while the reference stays hidden. There is no coverage check on ordinary vocabulary: defining hard-but-single-sense words is the least interesting part of glossing for a capable reader, so the loaded words are the whole exercise.
+- Evaluated by: On commit, each loaded word's two reference senses are shown beside the learner's reading; self-graded match / partial / miss. A loaded word left unaddressed or self-judged a miss feeds the session summary.
 
 ## Activity 6: Identify sentence-level devices
 
