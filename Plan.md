@@ -125,13 +125,24 @@ Study For Better for Verse (prosody.lib.virginia.edu) before building—especial
 - span answers auto-checked (exact/overlap) with recorded alternates where ambiguity is the poem's point; typed answers self-graded match/partial/miss; misses tracked
 - Richard tests: resolve every pronoun, mixing span and typed answers; commit and review the miss list
 
-### Task 12: Activity 4—subject, verb, object
+### ~~Task 12: Activity 4—subject, verb, object~~
 
 - sentence boundaries marked as numbered brackets spanning lines
 - per sentence: subject, main verb, and object-or-complement, answered by span or typed "(implied) X", with first-class "no object"; plus a required one-line who-does-what-to-whom paraphrase
 - gnarly sentences add a clause-nesting step; keep it tap-based—drag is not worth fighting on mobile
 - a sentence clears only when all four parts pass; misses feed the gate
 - Richard tests: clear at least one plain sentence, one gnarly sentence, and one "no object" answer end to end
+- `$Claude` Shipped the graded spine: subject/verb/object/paraphrase, clearing, misses, sentence navigation, numbered sentence markers, and the post-commit reveal with self-grading. The gnarly clause-nesting step—which Vision.md's "cleared" rule deliberately excludes from grading—ships here only as a read-only reference tree on reveal; the interactive tap-to-nest reconstruction is carved out to Task 20 so this task stayed one reviewable unit.
+
+### Task 12.1: Do more with really gnarly sentences
+
+The gnarliest sentences—Ozymandias's third, with its fronted object, nested
+relative clauses, and appositives—deserve richer treatment than the basic
+subject/verb/object pass and a static clause tree. Explore what "more" means:
+a guided walk-through that unpacks the sentence clause by clause, prompts on the
+tricky moves (anastrophe, deep nesting), and reads the paraphrase against the
+unpacking. Scope and interaction to be designed; keep it tap-based and mobile-first,
+and coordinate with Task 20's clause-nesting so the two do not overlap.
 
 ### Task 13: Activity 5—gloss the diction
 
@@ -163,6 +174,16 @@ Study For Better for Verse (prosody.lib.virginia.edu) before building—especial
 - then the argument: 1–2 sentences (enforced) naming the big question and the poem's claim; model argument revealed on commit; self-graded
 - session-summary screen: all activity scores and the surviving miss list; entry point to archive the attempt and start a fresh one
 - Richard tests: arrive at the gate with unresolved marks and misses; clear some, dismiss the rest; commit an argument and review the summary; start a fresh attempt and confirm the old one archived
+
+### Task 20: interactive clause-nesting for gnarly sentences
+
+Carved out of Task 12. Vision.md gives gnarly sentences an extra step: the learner
+reconstructs the sentence's clause nesting. Task 12 shipped the pack's reference
+clause tree as a read-only outline on reveal; this task makes the learner build it.
+
+- keep it tap-based—drag is not worth fighting on mobile: present the clauses in reading order and let the learner set each one's nesting depth by tapping indent/outdent, then check the depths against the pack's tree on commit
+- the clause tree is ungraded and outside the clearing criteria (Vision.md), so this is a study step, not a gate input
+- Richard tests: on a gnarly sentence, rebuild the nesting and confirm the reference tree checks against it
 
 ## Stage 4: wrap-up
 

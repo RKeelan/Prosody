@@ -82,13 +82,13 @@ export function layOutPoem(tokenised: TokenisedPoem): LaidOutStanza[] {
 }
 
 /**
- * The margin label for a line: every fifth line carries its number, plus the
- * first—enough to navigate by, little enough to ignore. An empty string
- * elsewhere. Shared by every poem renderer so the gutter reads the same
- * throughout.
+ * The margin label for a line: its number, on every line. A dense gutter reads
+ * unambiguously as line numbers, so it never competes with the in-text markers
+ * an activity may add (Activity 4's sentence numbers). Shared by every poem
+ * renderer so the gutter reads the same throughout.
  */
 export function gutterLabel(lineNumber: number): string {
-  return lineNumber === 1 || lineNumber % 5 === 0 ? String(lineNumber) : "";
+  return String(lineNumber);
 }
 
 /** Pair each of a line's tokens with the source text separating it from the previous one. */
