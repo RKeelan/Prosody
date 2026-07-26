@@ -134,21 +134,12 @@ Study For Better for Verse (prosody.lib.virginia.edu) before building—especial
 - Richard tests: clear at least one plain sentence, one gnarly sentence, and one "no object" answer end to end
 - `$Claude` Shipped the graded spine: subject/verb/object/paraphrase, clearing, misses, sentence navigation, numbered sentence markers, and the post-commit reveal with self-grading. The gnarly clause-nesting step—which Vision.md's "cleared" rule deliberately excludes from grading—ships here only as a read-only reference tree on reveal; the interactive tap-to-nest reconstruction is carved out to Task 20 so this task stayed one reviewable unit.
 
-### Task 12.1: Do more with really gnarly sentences
+### ~~Task 13: Activity 5—gloss the diction~~
 
-The gnarliest sentences—Ozymandias's third, with its fronted object, nested
-relative clauses, and appositives—deserve richer treatment than the basic
-subject/verb/object pass and a static clause tree. Explore what "more" means:
-a guided walk-through that unpacks the sentence clause by clause, prompts on the
-tricky moves (anastrophe, deep nesting), and reads the paraphrase against the
-unpacking. Scope and interaction to be designed; keep it tap-based and mobile-first,
-and coordinate with Task 20's clause-nesting so the two do not overlap.
-
-### Task 13: Activity 5—gloss the diction
-
-- every word tappable to add a gloss; odd-usage words dotted-underlined only after the learner commits, so the hunt is theirs first; odd-usage entries require both senses
-- coverage check against pack-flagged essential words, misses revealed as a list; definitions self-graded against pack glosses
-- Richard tests: a gloss pass and commit; review the coverage misses and odd-usage underlines; enter both senses on an odd-usage word
+- the poem's *loaded words* (the pack's odd-usage entries) are highlighted from the start; tapping one opens two fields for the two senses it carries at once, worked out while the reference stays hidden
+- on commit, each loaded word's two reference senses reveal beside the learner's for self-grading (match/partial/miss); a word left unaddressed or misread feeds the session summary
+- Richard tests: read the two senses of several loaded words and commit; check the reference senses and the self-grading read well at phone width
+- `$Claude` Shipped narrower than first specified, at Richard's direction: the essential-vocabulary coverage check was dropped (too easy to be interesting for a capable reader) and "odd usage" became "loaded words". The original spec—gloss every word, odd-usage words dotted-underlined only after commit, coverage on pack-flagged essentials—was replaced during review. Vision.md's Activity 5 updated to match.
 
 ### Task 14: Activity 6—sentence-level devices
 
