@@ -141,11 +141,12 @@ Study For Better for Verse (prosody.lib.virginia.edu) before building—especial
 - Richard tests: read the two senses of several loaded words and commit; check the reference senses and the self-grading read well at phone width
 - `$Claude` Shipped narrower than first specified, at Richard's direction: the essential-vocabulary coverage check was dropped (too easy to be interesting for a capable reader) and "odd usage" became "loaded words". The original spec—gloss every word, odd-usage words dotted-underlined only after commit, coverage on pack-flagged essentials—was replaced during review. Vision.md's Activity 5 updated to match.
 
-### Task 14: Activity 6—sentence-level devices
+### ~~Task 14: Activity 6—sentence-level devices~~
 
 - spot mode: highlight a span, tag it from a device palette, write one line on what work the device does; palette content (each device type's definition plus one canonical example from another poem) comes from the pack, so each poem carries exactly the device types relevant to it
 - on commit: reference instances revealed with function notes; auto-scored found / missed / false positive; function notes self-graded
 - Richard tests: tag several devices including a deliberate false positive; commit and check the found/missed/false-positive scoring
+- `$Claude` The headline score is found devices of the total, auto-scored from the frozen answer so it survives a reload exactly; false positives are surfaced in the reveal but kept off the miss list (they are the learner over-calling, not a gap to revisit). A found instance's function note is self-graded match / partial / miss, and only a self-graded miss feeds the session-summary miss list—consistent with Activities 3–5. The hunt-phase poem uses one uniform tag tint, and the reveal is a list rather than a re-tinted poem, because a real pack's instances overlap (irony over the whole inscription, apostrophe over "ye Mighty" inside it) and per-instance tints would fight over a token's colour.
 
 ### Task 15: Activity 7—broad devices
 
