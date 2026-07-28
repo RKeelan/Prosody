@@ -17,6 +17,7 @@
 import { useStore } from "zustand";
 import type { StoreApi } from "zustand/vanilla";
 import { ActivityCard } from "@/components/ActivityCard";
+import { DevicesActivity } from "@/components/DevicesActivity";
 import { GlossaryActivity } from "@/components/GlossaryActivity";
 import { PoemPanel } from "@/components/PoemPanel";
 import { PronounsActivity } from "@/components/PronounsActivity";
@@ -50,6 +51,9 @@ export function ActivityScreen({ info, pack, tokenised, store }: ActivityScreenP
   }
   if (info.key === "glossary") {
     return <GlossaryActivity pack={pack} tokenised={tokenised} store={store} />;
+  }
+  if (info.key === "devices") {
+    return <DevicesActivity pack={pack} tokenised={tokenised} store={store} />;
   }
   return <ActivityPlaceholder info={info} tokenised={tokenised} store={store} />;
 }
