@@ -33,5 +33,5 @@ Fold any message or content feedback in by amending, and merge only on his OK.
 
 All dependencies are pinned to exact versions — no ranges (`^`, `~`, `>=`, `*`). `bun add`
 pins exact via `.npmrc` (`save-exact=true`) and `bunfig.toml` (`[install] exact = true`).
-Dependabot handles upgrades, grouped weekly, on the **bun** ecosystem (not npm — CI installs
+Dependabot handles upgrades, grouped monthly, on the **bun** ecosystem (not npm — CI installs
 with `--frozen-lockfile`, so a stale `bun.lock` fails the build).
