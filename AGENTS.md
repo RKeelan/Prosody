@@ -6,17 +6,23 @@ against a shared Zod schema. See [Vision.md](Vision.md) for the full design.
 
 ## Stack
 
-Vite + React + TypeScript, Tailwind CSS v4, shadcn/ui. Bun is the package manager, script
-runner, and test runner. Grading logic lives in pure TypeScript modules under `bun test`.
+React + TypeScript, Tailwind CSS v4, shadcn/ui. Bun is the package manager, dev server,
+bundler, type checker, script runner, and test runner. Tailwind compiles through
+bun-plugin-tailwind, which `bunfig.toml` loads for the dev server and `scripts/build.ts` loads
+for the build. The plugin bundles its own Tailwind compiler, so upgrading the `tailwindcss`
+package doesn't upgrade the compiler. Grading logic lives in pure TypeScript modules under
+`bun test`.
 
 ## Commands
 
 - `bun install` — install dependencies
-- `bun run dev` — start the Vite dev server
-- `bun run check` — Biome lint and format check
+- `bun run dev` — start Bun's dev server, with hot reload
+- `bun run check` — Biome lint and format check (`bun check` runs this script too, not the
+  type checker)
+- `bun run typecheck` — type-check `src/` and `scripts/`
 - `bun run format` — Biome auto-fix (format and safe lints)
 - `bun test` — run tests (fails under 75% coverage)
-- `bun run build` — type-check (`tsc -b`) and build for production
+- `bun run build` — type-check and build for production into `dist/`
 - `bun run validate` — validate pack JSON files against the schema and consistency checks
 
 ## Git Workflow
