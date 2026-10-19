@@ -12,15 +12,16 @@ tapping tokens, never on browser text selection. See [Vision.md](Vision.md) for 
 
 ## Stack
 
-Vite + React + TypeScript, Tailwind CSS v4, and shadcn/ui, with Bun as the package manager,
-script runner, and test runner. Each poem is a JSON data pack validated against a shared Zod
-schema. Deployed to Cloudflare Pages.
+React + TypeScript, Tailwind CSS v4, and shadcn/ui, with Bun as the package manager, dev
+server, bundler, type checker, script runner, and test runner. Each poem is a JSON data pack
+validated against a shared Zod schema. Deployed to Cloudflare Pages.
 
 ## Commands
 
 - `bun install` — install dependencies
-- `bun run dev` — start the Vite dev server
+- `bun run dev` — start Bun's dev server, with hot reload
 - `bun run check` — Biome lint and format check
+- `bun run typecheck` — type-check `src/` and `scripts/`
 - `bun run format` — Biome auto-fix (format and safe lints)
 - `bun test` — run tests (fails under 75% coverage)
 - `bun run build` — type-check and build for production
@@ -34,7 +35,9 @@ pull request gets its own preview URL. Project settings:
 
 - Build command: `bun install --frozen-lockfile && bun run build`
 - Build output directory: `dist`
-- No environment variables; the Bun version is pinned in `.bun-version`
+- Environment variable `BUN_VERSION`, for Production and Preview, set to the version in
+  `.bun-version` (1.4.3). Cloudflare's build image ignores `.bun-version` and takes the Bun
+  version only from this variable.
 
 ## License
 

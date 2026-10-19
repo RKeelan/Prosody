@@ -1,8 +1,17 @@
 # Pin exact versions on install; Dependabot handles deliberate upgrades.
+# Skip peer dependencies: bun-plugin-tailwind names `bun` as one, and installing
+# it would put a second Bun in node_modules/.bin, which package scripts would
+# then run instead of the Bun that CI and Cloudflare Pages set up.
 [install]
 exact = true
+peer = false
 
 # Enforce coverage in every `bun test` run, locally and in CI.
 [test]
 coverage = true
 coverageThreshold = 0.75
+
+# Compile Tailwind in the dev server. The production build loads the same
+# plugin in scripts/build.ts, because `bun build` does not read this file.
+[serve.static]
+plugins = ["bun-plugin-tailwind"]
